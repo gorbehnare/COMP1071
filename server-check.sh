@@ -68,7 +68,7 @@ ufwAlwaysOn="yes"
 ### A.E. ###
 # Adding Colourized Output for readability
 # Color variables
-YW="\033[33m"
+YW="\033[1;33m"
 GN="\033[1;92m"
 RD="\033[01;31m"
 CL="\033[m"
