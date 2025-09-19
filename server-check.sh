@@ -49,7 +49,7 @@ labscore=0
 labmaxscore=0
 maxscore=0
 ### A.E. ### These are hard-coded, could be better to allow other instructors to use their own, or be able to remove this
-labscoresURL="https://zonzorp.net/gc/postlabscores.php"
+# labscoresURL="https://zonzorp.net/gc/postlabscores.php"
 ### A.E. ### Added variable for source update
 # servercheckURL="https://zonzorp.github.io/COMP1071/server-check.sh"
 servercheckURL="https://gorbehnare.github.io/COMP1071/server-check.sh"
@@ -513,7 +513,7 @@ if [ "$?" = "0" ]; then
 	scores-report "Lab 01 score is $labscore out of $labmaxscore"
 	score=$((score + labscore))
 	maxscore=$((maxscore + labmaxscore))
-	scores-report "   Running score is ${CY}$score ${CL} out of ${CY}$maxscore${CL}"
+	scores-report "   Running score is $score out of $maxscore"
 	scorespostdata="course=$course&semester=$semester&studentnumber=$studentnumber&firstname=$firstname&lastname=$lastname&lab=1&score=$labscore&maxscore=$labmaxscore"
 	### A.E. ###
     # curl -s -A "Mozilla/4.0" -d "$scorespostdata" $labscoresURL || problem-report "Unable to post scores to website"
@@ -633,7 +633,7 @@ ifname=`lshw -class network |grep 'logical name: [a-zA-Z0-9]*$' |awk '{gsub(/@.*
 	scores-report "Lab 02 score is $labscore out of $labmaxscore"
 	score=$((score + labscore))
 	maxscore=$((maxscore + labmaxscore))
-	scores-report "   Running score is ${CY}$score ${CL} out of ${CY}$maxscore${CL}"
+	scores-report "   Running score is $score out of $maxscore"
 	scorespostdata="course=$course&semester=$semester&studentnumber=$studentnumber&firstname=$firstname&lastname=$lastname&lab=2&score=$labscore&maxscore=$labmaxscore"
 	### A.E. ###
     # curl -s -A "Mozilla/4.0" -d "$scorespostdata" $labscoresURL || problem-report "Unable to post scores to website"
@@ -699,7 +699,7 @@ if [ "$?" = "0" ]; then
 	scores-report "Lab 03 score is $labscore out of $labmaxscore"
 	score=$((score + labscore))
 	maxscore=$((maxscore + labmaxscore))
-	scores-report "   Running score is ${CY}$score ${CL} out of ${CY}$maxscore${CL}"
+	scores-report "   Running score is $score out of $maxscore"
 	scorespostdata="course=$course&semester=$semester&studentnumber=$studentnumber&firstname=$firstname&lastname=$lastname&lab=3&score=$labscore&maxscore=$labmaxscore"
 	### A.E. ###
     # curl -s -A "Mozilla/4.0" -d "$scorespostdata" $labscoresURL || problem-report "Unable to post scores to website"
@@ -808,7 +808,7 @@ if [ "$?" = "0" ]; then
 	scores-report "Lab 04 score is $labscore out of $labmaxscore"
 	score=$((score + labscore))
 	maxscore=$((maxscore + labmaxscore))
-	scores-report "   Running score is ${CY}$score ${CL} out of ${CY}$maxscore${CL}"
+	scores-report "   Running score is $score out of $maxscore"
 	scorespostdata="course=$course&semester=$semester&studentnumber=$studentnumber&firstname=$firstname&lastname=$lastname&lab=4&score=$labscore&maxscore=$labmaxscore"
 	### A.E. ###
     # curl -s -A "Mozilla/4.0" -d "$scorespostdata" $labscoresURL || problem-report "Unable to post scores to website"
@@ -941,7 +941,7 @@ if [ "$?" = "0" ]; then
 	scores-report "Lab 05 score is $labscore out of $labmaxscore"
 	score=$((score + labscore))
 	maxscore=$((maxscore + labmaxscore))
-	scores-report "   Running score is ${CY}$score ${CL} out of ${CY}$maxscore${CL}"
+	scores-report "   Running score is $score out of $maxscore"
 	scorespostdata="course=$course&semester=$semester&studentnumber=$studentnumber&firstname=$firstname&lastname=$lastname&lab=5&score=$labscore&maxscore=$labmaxscore"
 	### A.E. ###
     # curl -s -A "Mozilla/4.0" -d "$scorespostdata" $labscoresURL || problem-report "Unable to post scores to website"
@@ -1055,7 +1055,7 @@ if [ "$dbinstalled" = 1 ]; then
 	scores-report "Lab 06 score is $labscore out of $labmaxscore"
 	score=$((score + labscore))
 	maxscore=$((maxscore + labmaxscore))
-	scores-report "   Running score is ${CY}$score ${CL} out of ${CY}$maxscore${CL}"
+	scores-report "   Running score is $score out of $maxscore"
 	scorespostdata="course=$course&semester=$semester&studentnumber=$studentnumber&firstname=$firstname&lastname=$lastname&lab=6&score=$labscore&maxscore=$labmaxscore"
 	### A.E. ###
     # curl -s -A "Mozilla/4.0" -d "$scorespostdata" $labscoresURL || problem-report "Unable to post scores to website"
@@ -1131,7 +1131,7 @@ if [ "$?" = "0" ]; then
 	scores-report "Lab 07 score is $labscore out of $labmaxscore"
 	score=$((score + labscore))
 	maxscore=$((maxscore + labmaxscore))
-	scores-report "   Running score is ${CY}$score ${CL} out of ${CY}$maxscore${CL}"
+	scores-report "   Running score is $score out of $maxscore"
 	scorespostdata="course=$course&semester=$semester&studentnumber=$studentnumber&firstname=$firstname&lastname=$lastname&lab=7&score=$labscore&maxscore=$labmaxscore"
 	### A.E. ###
     # curl -s -A "Mozilla/4.0" -d "$scorespostdata" $labscoresURL || problem-report "Unable to post scores to website"
@@ -1231,7 +1231,7 @@ if [ "$?" = "0" ]; then
 	scores-report "Lab 08 score is $labscore out of $labmaxscore"
 	score=$((score + labscore))
 	maxscore=$((maxscore + labmaxscore))
-	scores-report "   Running score is ${CY}$score ${CL} out of ${CY}$maxscore${CL}"
+	scores-report "   Running score is $score out of $maxscore"
 	scorespostdata="course=$course&semester=$semester&studentnumber=$studentnumber&firstname=$firstname&lastname=$lastname&lab=8&score=$labscore&maxscore=$labmaxscore"
 	### A.E. ###
     # curl -s -A "Mozilla/4.0" -d "$scorespostdata" $labscoresURL || problem-report "Unable to post scores to website"
@@ -1269,7 +1269,7 @@ if [ "$?" = "0" ]; then
 	scores-report "Lab 09 score is $labscore out of $labmaxscore"
 	score=$((score + labscore))
 	maxscore=$((maxscore + labmaxscore))
-	scores-report "   Running score is ${CY}$score ${CL} out of ${CY}$maxscore${CL}"
+	scores-report "   Running score is $score out of $maxscore"
 	scorespostdata="course=$course&semester=$semester&studentnumber=$studentnumber&firstname=$firstname&lastname=$lastname&lab=9&score=$labscore&maxscore=$labmaxscore"
 	### A.E. ###
     # curl -s -A "Mozilla/4.0" -d "$scorespostdata" $labscoresURL || problem-report "Unable to post scores to website"
