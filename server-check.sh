@@ -65,6 +65,15 @@ skipUpdate="no"
 ufwAlwaysOn="yes"
 . /etc/os-release
 
+### A.E. ###
+# Adding Colourized Output for readability
+# Color variables
+YW="\033[33m"
+GN="\033[1;92m"
+RD="\033[01;31m"
+CL="\033[m"
+# Example on how to use: echo -e "${YW}Yellow text!${CL}"
+
 ############
 # Functions
 ############
@@ -295,8 +304,9 @@ if [ "$skipUpdate" = "no" ]; then
 	if [ "$?" != "0" -a -s /root/server-check-new.sh ]; then
 		mv /root/server-check-new.sh /root/server-check.sh
 		chmod +x /root/server-check.sh
-		echo "server-check.sh updated"
-		/root/server-check.sh -s "$@"
+		echo -e "${YW}server-check.sh updated! Please re-run the script.${CL}"
+		### A.E. ### just ask user to re-run the script for now. This was done to prevent an edge-case issue
+		# /root/server-check.sh -s "$@"
 		rm $logfile # this logfile is pointless, discard it
 		exit
 	else
