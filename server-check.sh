@@ -87,7 +87,7 @@ function problem-report {
 }
 
 function verbose-report {
-	[ "$verbose" = "yes" ] && echo "$1"
+	[ "$verbose" = "yes" ] && echo -e "$1"
 	echo "$1" >> $logfile
 }
 
