@@ -99,7 +99,7 @@ function scores-report {
 # Usage: lab_header lab-name
 function lab_header {
 	echo ""
-	echo "Checking for Lab $1 tasks"
+	echo -e "${GN}Checking for Lab $1 tasks${CL}"
 	echo "--------------------------"
 }
 
