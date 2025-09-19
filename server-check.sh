@@ -505,7 +505,8 @@ if [ "$?" = "0" ]; then
 	maxscore=$((maxscore + labmaxscore))
 	scores-report "   Running score is $score out of $maxscore"
 	scorespostdata="course=$course&semester=$semester&studentnumber=$studentnumber&firstname=$firstname&lastname=$lastname&lab=1&score=$labscore&maxscore=$labmaxscore"
-	curl -s -A "Mozilla/4.0" -d "$scorespostdata" $labscoresURL || problem-report "Unable to post scores to website"
+	### A.E. ###
+    # curl -s -A "Mozilla/4.0" -d "$scorespostdata" $labscoresURL || problem-report "Unable to post scores to website"
 else
 	problem-report "sl package not installed, skipping lab 01"
 fi
@@ -624,8 +625,8 @@ ifname=`lshw -class network |grep 'logical name: [a-zA-Z0-9]*$' |awk '{gsub(/@.*
 	maxscore=$((maxscore + labmaxscore))
 	scores-report "   Running score is $score out of $maxscore"
 	scorespostdata="course=$course&semester=$semester&studentnumber=$studentnumber&firstname=$firstname&lastname=$lastname&lab=2&score=$labscore&maxscore=$labmaxscore"
-	curl -s -A "Mozilla/4.0" -d "$scorespostdata" $labscoresURL || problem-report "Unable to post scores to website"
-
+	### A.E. ###
+    # curl -s -A "Mozilla/4.0" -d "$scorespostdata" $labscoresURL || problem-report "Unable to post scores to website"
 else
 	problem-report "traceroute package not installed, skipping lab 02"
 fi
@@ -690,7 +691,8 @@ if [ "$?" = "0" ]; then
 	maxscore=$((maxscore + labmaxscore))
 	scores-report "   Running score is $score out of $maxscore"
 	scorespostdata="course=$course&semester=$semester&studentnumber=$studentnumber&firstname=$firstname&lastname=$lastname&lab=3&score=$labscore&maxscore=$labmaxscore"
-	curl -s -A "Mozilla/4.0" -d "$scorespostdata" $labscoresURL || problem-report "Unable to post scores to website"
+	### A.E. ###
+    # curl -s -A "Mozilla/4.0" -d "$scorespostdata" $labscoresURL || problem-report "Unable to post scores to website"
 else
 	problem-report "bind9 package not installed, skipping lab 03"
 fi
@@ -798,7 +800,8 @@ if [ "$?" = "0" ]; then
 	maxscore=$((maxscore + labmaxscore))
 	scores-report "   Running score is $score out of $maxscore"
 	scorespostdata="course=$course&semester=$semester&studentnumber=$studentnumber&firstname=$firstname&lastname=$lastname&lab=4&score=$labscore&maxscore=$labmaxscore"
-	curl -s -A "Mozilla/4.0" -d "$scorespostdata" $labscoresURL || problem-report "Unable to post scores to website"
+	### A.E. ###
+    # curl -s -A "Mozilla/4.0" -d "$scorespostdata" $labscoresURL || problem-report "Unable to post scores to website"
 else
 	problem-report "apache2 not installed, skipping lab 04"
 fi
@@ -930,7 +933,8 @@ if [ "$?" = "0" ]; then
 	maxscore=$((maxscore + labmaxscore))
 	scores-report "   Running score is $score out of $maxscore"
 	scorespostdata="course=$course&semester=$semester&studentnumber=$studentnumber&firstname=$firstname&lastname=$lastname&lab=5&score=$labscore&maxscore=$labmaxscore"
-	curl -s -A "Mozilla/4.0" -d "$scorespostdata" $labscoresURL || problem-report "Unable to post scores to website"
+	### A.E. ###
+    # curl -s -A "Mozilla/4.0" -d "$scorespostdata" $labscoresURL || problem-report "Unable to post scores to website"
 else
 	problem-report "easy-rsa not installed, skipping lab 05"
 fi
@@ -1043,7 +1047,8 @@ if [ "$dbinstalled" = 1 ]; then
 	maxscore=$((maxscore + labmaxscore))
 	scores-report "   Running score is $score out of $maxscore"
 	scorespostdata="course=$course&semester=$semester&studentnumber=$studentnumber&firstname=$firstname&lastname=$lastname&lab=6&score=$labscore&maxscore=$labmaxscore"
-	curl -s -A "Mozilla/4.0" -d "$scorespostdata" $labscoresURL || problem-report "Unable to post scores to website"
+	### A.E. ###
+    # curl -s -A "Mozilla/4.0" -d "$scorespostdata" $labscoresURL || problem-report "Unable to post scores to website"
 else
 	problem-report "mysql-server-5.7 not installed, skipping lab 06"
 fi
@@ -1118,7 +1123,8 @@ if [ "$?" = "0" ]; then
 	maxscore=$((maxscore + labmaxscore))
 	scores-report "   Running score is $score out of $maxscore"
 	scorespostdata="course=$course&semester=$semester&studentnumber=$studentnumber&firstname=$firstname&lastname=$lastname&lab=7&score=$labscore&maxscore=$labmaxscore"
-	curl -s -A "Mozilla/4.0" -d "$scorespostdata" $labscoresURL || problem-report "Unable to post scores to website"
+	### A.E. ###
+    # curl -s -A "Mozilla/4.0" -d "$scorespostdata" $labscoresURL || problem-report "Unable to post scores to website"
 else
 	problem-report "cups package not installed, skipping lab 07"
 fi
@@ -1217,7 +1223,8 @@ if [ "$?" = "0" ]; then
 	maxscore=$((maxscore + labmaxscore))
 	scores-report "   Running score is $score out of $maxscore"
 	scorespostdata="course=$course&semester=$semester&studentnumber=$studentnumber&firstname=$firstname&lastname=$lastname&lab=8&score=$labscore&maxscore=$labmaxscore"
-	curl -s -A "Mozilla/4.0" -d "$scorespostdata" $labscoresURL || problem-report "Unable to post scores to website"
+	### A.E. ###
+    # curl -s -A "Mozilla/4.0" -d "$scorespostdata" $labscoresURL || problem-report "Unable to post scores to website"
 else
 	problem-report "postfix package not installed, skipping lab 08"
 fi
@@ -1254,7 +1261,8 @@ if [ "$?" = "0" ]; then
 	maxscore=$((maxscore + labmaxscore))
 	scores-report "   Running score is $score out of $maxscore"
 	scorespostdata="course=$course&semester=$semester&studentnumber=$studentnumber&firstname=$firstname&lastname=$lastname&lab=9&score=$labscore&maxscore=$labmaxscore"
-	curl -s -A "Mozilla/4.0" -d "$scorespostdata" $labscoresURL || problem-report "Unable to post scores to website"
+	### A.E. ###
+    # curl -s -A "Mozilla/4.0" -d "$scorespostdata" $labscoresURL || problem-report "Unable to post scores to website"
 else
 	problem-report "vsftpd package not installed, skipping lab 09"
 fi
