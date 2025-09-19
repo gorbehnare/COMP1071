@@ -14,13 +14,13 @@
 # Lab 1:
 # add tree, glances, and htop packages to lab and slides
 # modify default user homedir to only have Documents, Pictures, Downloads, .bash_login
-### A.E. ### Modified lab 1 to check only for Documents, Pictures, and public_html
+### A.E. ### 2025-09-19: Modified lab 1 to check only for bin, Documents, Pictures, and public_html (not Downloads)
 # make changes to home dir and PATH before installing packages, so that sl and fortune work better
 # change package name for fortune to fortune-mod
 # .bash_login should source ~/.profile
 # get rid of adduser example and only keep useradd version (### A.E. ### to accomodate Redhat/Centos, but CentOS is now "gone")
 
-### A.E. ### IBM bought RedHat and Centos is no longer a good option (unstable only). Should we accomodate this any longer?
+### A.E. ### IBM bought RedHat and Centos is no longer a good fit for us (unstable only). Should we accomodate this any longer?
 # to accomodate centos-7:
 #   apt to yum, dpkg to rpm
 #   to add pkgs.org repo, do wget http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-9.noarch.rpm;rpm -i epel*
@@ -467,12 +467,12 @@ if [ "$?" = "0" ]; then
 	else
 		if [ ! -d $homedir ]; then
 			problem-report "Home directory for user $firstname does not exist"
-			### A.E. ### changed useradd to adduser
+			### A.E. ### changed userdel to deluser, and useradd to adduser
 			problem-report "Try deluser $firstname and add the user back properly with adduser"
 		else
-		    ### A.E. ### Removing homedir/bin directory check
-			# if [ ! -d $homedir/bin -o ! -d $homedir/public_html -o ! -d $homedir/Documents -o ! -d $homedir/Pictures ]; then
-			if [ ! -d $homedir/public_html -o ! -d $homedir/Documents -o ! -d $homedir/Pictures ]; then
+		    ### A.E. ### Removing check for ~/bin directory check (changed my mind! 2025-09-19)
+			# if [ ! -d $homedir/public_html -o ! -d $homedir/Documents -o ! -d $homedir/Pictures ]; then
+			if [ ! -d $homedir/bin -o ! -d $homedir/public_html -o ! -d $homedir/Documents -o ! -d $homedir/Pictures ]; then
 				problem-report "One or more of the files or directories from /etc/skel are missing from the home directory for $firstname"
 				problem-report "Review the instructions to make sure you correctly built /etc/skel and then copy the contents of it to /home/$firstname"
 			else
