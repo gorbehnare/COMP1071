@@ -70,7 +70,7 @@ ufwAlwaysOn="yes"
 # Color variables
 YW="\033[1;33m"
 GN="\033[1;92m"
-RD="\033[01;31m"
+CY="\033[1;36m"
 CL="\033[m"
 # Example on how to use: echo -e "${YW}Yellow text!${CL}"
 
@@ -100,7 +100,7 @@ function scores-report {
 function lab_header {
 	echo ""
 	echo -e "${GN}Checking for Lab $1 tasks${CL}"
-	echo "--------------------------"
+	echo -e "${GN}--------------------------${CL}"
 }
 
 # function to check if packages are installed
@@ -513,7 +513,7 @@ if [ "$?" = "0" ]; then
 	scores-report "Lab 01 score is $labscore out of $labmaxscore"
 	score=$((score + labscore))
 	maxscore=$((maxscore + labmaxscore))
-	scores-report "   Running score is $score out of $maxscore"
+	scores-report "   Running score is ${CY}$score ${CL} out of ${CY}$maxscore${CL}"
 	scorespostdata="course=$course&semester=$semester&studentnumber=$studentnumber&firstname=$firstname&lastname=$lastname&lab=1&score=$labscore&maxscore=$labmaxscore"
 	### A.E. ###
     # curl -s -A "Mozilla/4.0" -d "$scorespostdata" $labscoresURL || problem-report "Unable to post scores to website"
@@ -633,7 +633,7 @@ ifname=`lshw -class network |grep 'logical name: [a-zA-Z0-9]*$' |awk '{gsub(/@.*
 	scores-report "Lab 02 score is $labscore out of $labmaxscore"
 	score=$((score + labscore))
 	maxscore=$((maxscore + labmaxscore))
-	scores-report "   Running score is $score out of $maxscore"
+	scores-report "   Running score is ${CY}$score ${CL} out of ${CY}$maxscore${CL}"
 	scorespostdata="course=$course&semester=$semester&studentnumber=$studentnumber&firstname=$firstname&lastname=$lastname&lab=2&score=$labscore&maxscore=$labmaxscore"
 	### A.E. ###
     # curl -s -A "Mozilla/4.0" -d "$scorespostdata" $labscoresURL || problem-report "Unable to post scores to website"
@@ -699,7 +699,7 @@ if [ "$?" = "0" ]; then
 	scores-report "Lab 03 score is $labscore out of $labmaxscore"
 	score=$((score + labscore))
 	maxscore=$((maxscore + labmaxscore))
-	scores-report "   Running score is $score out of $maxscore"
+	scores-report "   Running score is ${CY}$score ${CL} out of ${CY}$maxscore${CL}"
 	scorespostdata="course=$course&semester=$semester&studentnumber=$studentnumber&firstname=$firstname&lastname=$lastname&lab=3&score=$labscore&maxscore=$labmaxscore"
 	### A.E. ###
     # curl -s -A "Mozilla/4.0" -d "$scorespostdata" $labscoresURL || problem-report "Unable to post scores to website"
@@ -808,7 +808,7 @@ if [ "$?" = "0" ]; then
 	scores-report "Lab 04 score is $labscore out of $labmaxscore"
 	score=$((score + labscore))
 	maxscore=$((maxscore + labmaxscore))
-	scores-report "   Running score is $score out of $maxscore"
+	scores-report "   Running score is ${CY}$score ${CL} out of ${CY}$maxscore${CL}"
 	scorespostdata="course=$course&semester=$semester&studentnumber=$studentnumber&firstname=$firstname&lastname=$lastname&lab=4&score=$labscore&maxscore=$labmaxscore"
 	### A.E. ###
     # curl -s -A "Mozilla/4.0" -d "$scorespostdata" $labscoresURL || problem-report "Unable to post scores to website"
@@ -941,7 +941,7 @@ if [ "$?" = "0" ]; then
 	scores-report "Lab 05 score is $labscore out of $labmaxscore"
 	score=$((score + labscore))
 	maxscore=$((maxscore + labmaxscore))
-	scores-report "   Running score is $score out of $maxscore"
+	scores-report "   Running score is ${CY}$score ${CL} out of ${CY}$maxscore${CL}"
 	scorespostdata="course=$course&semester=$semester&studentnumber=$studentnumber&firstname=$firstname&lastname=$lastname&lab=5&score=$labscore&maxscore=$labmaxscore"
 	### A.E. ###
     # curl -s -A "Mozilla/4.0" -d "$scorespostdata" $labscoresURL || problem-report "Unable to post scores to website"
@@ -1055,7 +1055,7 @@ if [ "$dbinstalled" = 1 ]; then
 	scores-report "Lab 06 score is $labscore out of $labmaxscore"
 	score=$((score + labscore))
 	maxscore=$((maxscore + labmaxscore))
-	scores-report "   Running score is $score out of $maxscore"
+	scores-report "   Running score is ${CY}$score ${CL} out of ${CY}$maxscore${CL}"
 	scorespostdata="course=$course&semester=$semester&studentnumber=$studentnumber&firstname=$firstname&lastname=$lastname&lab=6&score=$labscore&maxscore=$labmaxscore"
 	### A.E. ###
     # curl -s -A "Mozilla/4.0" -d "$scorespostdata" $labscoresURL || problem-report "Unable to post scores to website"
@@ -1131,7 +1131,7 @@ if [ "$?" = "0" ]; then
 	scores-report "Lab 07 score is $labscore out of $labmaxscore"
 	score=$((score + labscore))
 	maxscore=$((maxscore + labmaxscore))
-	scores-report "   Running score is $score out of $maxscore"
+	scores-report "   Running score is ${CY}$score ${CL} out of ${CY}$maxscore${CL}"
 	scorespostdata="course=$course&semester=$semester&studentnumber=$studentnumber&firstname=$firstname&lastname=$lastname&lab=7&score=$labscore&maxscore=$labmaxscore"
 	### A.E. ###
     # curl -s -A "Mozilla/4.0" -d "$scorespostdata" $labscoresURL || problem-report "Unable to post scores to website"
@@ -1231,7 +1231,7 @@ if [ "$?" = "0" ]; then
 	scores-report "Lab 08 score is $labscore out of $labmaxscore"
 	score=$((score + labscore))
 	maxscore=$((maxscore + labmaxscore))
-	scores-report "   Running score is $score out of $maxscore"
+	scores-report "   Running score is ${CY}$score ${CL} out of ${CY}$maxscore${CL}"
 	scorespostdata="course=$course&semester=$semester&studentnumber=$studentnumber&firstname=$firstname&lastname=$lastname&lab=8&score=$labscore&maxscore=$labmaxscore"
 	### A.E. ###
     # curl -s -A "Mozilla/4.0" -d "$scorespostdata" $labscoresURL || problem-report "Unable to post scores to website"
@@ -1269,7 +1269,7 @@ if [ "$?" = "0" ]; then
 	scores-report "Lab 09 score is $labscore out of $labmaxscore"
 	score=$((score + labscore))
 	maxscore=$((maxscore + labmaxscore))
-	scores-report "   Running score is $score out of $maxscore"
+	scores-report "   Running score is ${CY}$score ${CL} out of ${CY}$maxscore${CL}"
 	scorespostdata="course=$course&semester=$semester&studentnumber=$studentnumber&firstname=$firstname&lastname=$lastname&lab=9&score=$labscore&maxscore=$labmaxscore"
 	### A.E. ###
     # curl -s -A "Mozilla/4.0" -d "$scorespostdata" $labscoresURL || problem-report "Unable to post scores to website"
