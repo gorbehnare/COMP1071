@@ -847,6 +847,10 @@ sudo grep -<span class="hljs-keyword">a</span> named /var/<span class="hljs-buil
 <div class="joplin-editable"><pre class="joplin-source" data-joplin-language="bash" data-joplin-source-open="```bash
 " data-joplin-source-close="
 ```">sudo sed -i -e &apos;s/^#DNS=.*/DNS=172.16.3.2/&apos; /etc/systemd/resolved.conf</pre><pre class="hljs"><code><span class="hljs-built_in">sudo</span> sed -i -e <span class="hljs-string">&apos;s/^#DNS=.*/DNS=172.16.3.2/&apos;</span> /etc/systemd/resolved.conf</code></pre></div>
+<p>Check the status of your local resolver using the following command:</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="bash" data-joplin-source-open="```bash
+" data-joplin-source-close="
+```">resolvectl status</pre><pre class="hljs"><code>resolvectl status</code></pre></div>
 <p>Check that these commands do not produce errors:</p>
 <div class="joplin-editable"><pre class="joplin-source" data-joplin-language="bash" data-joplin-source-open="```bash
 " data-joplin-source-close="
