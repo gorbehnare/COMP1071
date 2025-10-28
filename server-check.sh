@@ -244,6 +244,7 @@ function draw_box {
      width="$2"
      box_color="$3"
 	# Create the top border with red asterisks
+	printf \n ""
 	printf "${box_color}%-${width}s${CL}\n" "$(printf '%*s' "$width" '' | tr ' ' '*')"
 
 	# Print the text inside the box, wrapping to fit the specified width
@@ -323,7 +324,7 @@ while [ $# -gt 0 ]; do
 done
 
 if [ "$skipUpdate" = "no" ]; then
-	echo "Checking if the script is up to date, please wait..."
+	echo -e "Checking if the script is up to date, Please wait..."
 	### A.E. ### The update path is hard-coded. Make this dynamic, and possibly allow multiple sources
 	# wget -nv -O /root/server-check-new.sh https://zonzorp.github.io/COMP1071/server-check.sh >& /dev/null
 	wget -nv -O /root/server-check-new.sh $servercheckURL >& /dev/null
@@ -331,14 +332,15 @@ if [ "$skipUpdate" = "no" ]; then
 	if [ "$?" != "0" -a -s /root/server-check-new.sh ]; then
 		mv /root/server-check-new.sh /root/server-check.sh
 		chmod +x /root/server-check.sh
-		echo -e "${YW}server-check.sh updated! Please re-run the script.${CL}"
+		echo -e "   A different version of the script was downloaded."
+		echo -e "   server-check.sh updated! ${YW}Please re-run the script.${CL}"
 		### A.E. ### just ask user to re-run the script for now. This was done to prevent an edge-case issue
 		# /root/server-check.sh -s "$@"
 		rm $logfile # this logfile is pointless, discard it
 		exit
 	else
 		rm /root/server-check-new.sh
-		echo -e "${YW}Did not detect changes to the script.${CL}"
+		echo -e "   Did not detect any changes to the script."
 	fi
 fi
 
