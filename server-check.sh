@@ -344,24 +344,6 @@ if [ "$skipUpdate" = "no" ]; then
 	fi
 fi
 
-#cat <<EOF
-#This script will check various parts of your server to see if you have completed
-#the setup of the various services and configuration as instructed during the semester.
-#***********************!!!!!!!!!!*********************
-#It is expected that you use lower case only whenever you use your name as part of
-#your server configuration, for username, domain name, etc.
-#***********************!!!!!!!!!!*********************
-#EOF
-#echo ""
-#echo -e "This script will check various parts of your server to see if you have completed the"
-#echo -e "setup of the various services and configuration as instructed during the semester."
-#echo -e "${RD}*******************************! WARNING !*******************************${CL}"
-#echo -e "${RD}*${CL} It is expected that you ${YW}use lower case only ${CL} whenever you use your    ${RD}*${CL}"
-#echo -e "${RD}*${CL} name as part of your server configuration, for username, domain       ${RD}*${CL}"
-#echo -e "${RD}*${CL} name, etc.                                                            ${RD}*${CL}"
-#echo -e "${RD}*************************************************************************${CL}"
-#echo ""
-
 ### A. E. ### 
 # Using the new draw_box function instead of echo, cat, and printf
 draw_box "It is expected that you use lower case only whenever you use your name as part of your server configuration, for username, domain name, etc." 80 ${RD}
@@ -576,18 +558,7 @@ if [ $? = "0" ]; then
 	fi
 	package_checks "traceroute ethtool nmap ufw cockpit"
 # removed checks for ntopng 2021-08-27, per discussion with A.E.
-#	dpkg -L ntop >& /dev/null
-#	if [ $? != "0" ]; then
-#		dpkg -L ntopng >& /dev/null
-#	fi
-#	if [ $? != "0" ]; then
-#		problem-report "ntop or ntopng package must be installed"
-#		problem-report "Use apt-get to install the ntop or ntopng package"
-#else
-#		verbose-report "ntop or ntopng package found ok"
-#		((labscore++))
-#	fi
-#	((labmaxscore++))
+# Removed commented code for cleanup
 # take last installed interface to allow virtualbox vms to use double interfaces, one NAT, one host-only, so that host pc can connect to vm
 ifname=`lshw -class network |grep 'logical name: [a-zA-Z0-9]*$' |awk '{gsub(/@.*/,"");print $3}'|tail -1`
 	if [[ "$VERSION_ID" < "18.04" ]]; then
@@ -649,21 +620,7 @@ ifname=`lshw -class network |grep 'logical name: [a-zA-Z0-9]*$' |awk '{gsub(/@.*
 # ssh rule in firewall config check
 	check_ufw ssh 22/tcp
 # ntopng removed 21-08-27 per discussion with A.E.
-#	check_ufw ntopng 3000/tcp
-#	wget -O - http://localhost:3000 >&/dev/null
-#	if [ $? != "0" ]; then
-#		service ntopng start
-#		sleep 4
-#	fi
-#	wget -O - http://localhost:3000 >&/dev/null
-#	if [ $? != "0" ]; then
-#		problem-report "Failed to retrieve ntop web page from default web server using localhost"
-#		problem-report "Review the instructions for ntop. Ensure you specified a network interface to monitor in the ntop setup. Run dpkg-reconfigure ntop if necessary."
-#	else
-#		verbose-report "ntop web interface retrieval using localhost ok"
-#		((labscore+=2))
-#	fi
-#	((labmaxscore+=2))
+## Removed the code for cleanup
 	wget -O - http://localhost:9090 >&/dev/null
 	if [ $? != "0" ]; then
 		problem-report "Failed to retrieve cockpit web page from default web server using localhost"
@@ -708,36 +665,7 @@ if [ "$?" = "0" ]; then
 ## check for working external dns
 ## because of ubuntu 20.04 check config details
 ## check for resolv.conf, should not exist, or should be empty
-#	if [ -f /etc/resolv.conf ]; then
-#		if [[ "$VERSION_ID" < "20.04" ]]; then
-#			verbose-report "resolv.conf check not done unless running 20.04"
-#			resolvconfcheck="passed"
-#		elif [ $(egrep -cv '^#|^$' /etc/resolv.conf) -gt 0 ]; then
-#			problem-report "resolv.conf is not empty"
-#			problem-report "resolv.conf should not have any configuration lines in it"
-#			resolvconfcheck="failed"
-#		else
-#			verbose-report "resolv.conf is empty OK"
-#			resolvconfcheck="passed"
-#		fi
-#	else
-#		verbose-report "resolv.conf is removed OK"
-#		resolvconfcheck="passed"
-#	fi
-#	if [ "$resolvconfcheck" = "passed" ]; then
-#		# try a lookup that requires external dns to be working
-#		nslookup icanhazip.com >&/dev/null
-#		if [ $? != "0" ]; then
-#			problem-report "icanhazip.com not found by nslookup"
-#			problem-report "Check that /etc/resolv.conf is empty or removed"
-#			problem-report "Verify that your bind service is running and properly configured"
-#			problem-report "Check that the internet is reachable"
-#		else
-#			verbose-report "nslookup of zonzorp.net ok"
-#			((labscore+=3))
-#		fi
-#	fi
-#	((labmaxscore+=3))
+# Removed for cleanup
 	check_ufw dns 53
 	scores-report "Lab 03 score is $labscore out of $labmaxscore"
 	score=$((score + labscore))
@@ -1148,29 +1076,7 @@ if [ "$?" = "0" ]; then
 	((labmaxscore++))
 	check_ufw IPP 631
 	check_ufw Bonjour 5353
-#	cmp /usr/share/cups/mime/airprint.types <<< "image/urf urf string(0,UNIRAST<00>)" >&/dev/null
-#	if [ $? != "0" ]; then
-#		problem-report "/usr/share/cups/mime/airprint.types missing or has wrong content"
-#	else
-#		verbose-report "/usr/share/cups/mime/airprint.types ok"
-#		((labscore++))
-#	fi
-#	((labmaxscore++))
-#	cmp /usr/share/cups/mime/airprint.convs <<< "image/urf urf application/pdf 100 pdftoraster" >&/dev/null
-#	if [ $? != "0" ]; then
-#		problem-report "/usr/share/cups/mime/airprint.convs missing or has wrong content"
-#	else
-#		verbose-report "/usr/share/cups/mime/airprint.convs ok"
-#		((labscore++))
-#	fi
-#	((labmaxscore++))
-#	if [ ! -s /etc/avahi/services/AirPrint-PDF.service ]; then
-#		problem-report "/etc/avahi/services/AirPrint-PDF.service missing or has wrong content"
-#	else
-#		verbose-report "/etc/avahi/services/AirPrint-PDF.service ok"
-#		((labscore++))
-#	fi
-#	((labmaxscore++))
+## Removed comented code for cleanup
 	scores-report "Lab 07 score is $labscore out of $labmaxscore"
 	score=$((score + labscore))
 	maxscore=$((maxscore + labmaxscore))
@@ -1208,14 +1114,7 @@ if [ "$?" = "0" ]; then
 	fi
 	((labmaxscore+=3))
 	basic_postfix_config=1
-#	if [ "$(postconf home_mailbox)" != "home_mailbox =" ]; then
-#		basic_postfix_config=0
-#		problem-report "postfix basic config not complete"
-#		problem-report "see lab instructions for setting postfix home_mailbox using postconf"
-#	elif [ "$(postconf smtpd_sasl_type)" != "smtpd_sasl_type = dovecot" ]; then
-#		basic_postfix_config=0
-#		problem-report "postfix basic config not complete"
-#		problem-report "see lab instructions for setting postfix smtpd_sasl_type using postconf"
+## Removed commented code for cleanup
 	if [ "$(postconf smtpd_tls_key_file)" != "smtpd_tls_key_file = /etc/ssl/private/mail.$zone.key" ]; then
 		basic_postfix_config=0
 		problem-report "postfix basic config not complete"
@@ -1224,10 +1123,7 @@ if [ "$?" = "0" ]; then
 		basic_postfix_config=0
 		problem-report "postfix basic config not complete"
 		problem-report "see lab instructions for setting postfix smtpd_tls_cert_file using postconf"
-#	elif [ "$(postconf myhostname)" != "myhostname = mail.$zone" ]; then
-#		basic_postfix_config=0
-#		problem-report "postfix basic config not complete"
-#		problem-report "see lab instructions for setting postfix myhostname using postconf"
+## Removed commented code for cleanup
 	fi
 	if [ "$basic_postfix_config" = "1" ]; then
 		((labscore+=3))
@@ -1250,15 +1146,7 @@ if [ "$?" = "0" ]; then
 		fi
 	fi
 	((labmaxscore+=3))
-#	grep "mail_privileged_group = mail" /etc/dovecot/conf.d/10-mail.conf >& /dev/null
-#	if [ $? != "0" ]; then
-#		problem-report "Dovecot not using mail_privileged_group"
-#		problem-report "Review instructions for setting mail_privileged_group in /etc/dovecot/conf.d/10-mail.conf"
-#	else
-#		echo "Dovecot mail_privileged_group ok"
-#		((labscore+=2))
-#	fi
-#	((labmaxscore+=2))
+## Removed commented code for cleanup
 	wget -O /tmp/roundcube.html http://localhost/roundcube >& /dev/null
 	if [ $? != "0" ]; then
 		problem-report "Failed to retrieve roundcube web page from localhost"
