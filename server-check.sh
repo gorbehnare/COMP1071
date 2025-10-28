@@ -240,11 +240,11 @@ function check_ufw {
 # Example: draw_box <Text> <Width> <Border_colour>
 
 function draw_box {
-     text="$1"
-     width="$2"
-     box_color="$3"
+    text="$1"
+    width="$2"
+    box_color="$3"
+	echo
 	# Create the top border with red asterisks
-	printf \n ""
 	printf "${box_color}%-${width}s${CL}\n" "$(printf '%*s' "$width" '' | tr ' ' '*')"
 
 	# Print the text inside the box, wrapping to fit the specified width
