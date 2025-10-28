@@ -332,10 +332,10 @@ if [ "$skipUpdate" = "no" ]; then
 	if [ "$?" != "0" -a -s /root/server-check-new.sh ]; then
 		mv /root/server-check-new.sh /root/server-check.sh
 		chmod +x /root/server-check.sh
-		echo -e "${YW}--> A different version of the script was downloaded.${CL}"
-		#echo -e "--> The server-check.sh updated! ${YW}Please re-run the script.${CL}"
-		### A.E. ### just ask user to re-run the script for now. This was done to prevent an edge-case issue
-		/root/server-check.sh -s "$@"
+		echo -e "${CY}-->${CL} A different version of the script was downloaded."
+		echo -e "${CY}-->${CL} The server-check.sh updated! ${YW}Please re-run the script.${CL}"
+		### A.E. ### just ask user to re-run the script for now. 
+		#/root/server-check.sh -s "$@"
 		rm $logfile # this logfile is pointless, discard it
 		exit
 	else
