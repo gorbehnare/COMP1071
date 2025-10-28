@@ -68,10 +68,11 @@ ufwAlwaysOn="yes"
 ### A.E. ###
 # Adding Colourized Output for readability
 # Color variables
-YW="\033[1;33m"
-GN="\033[1;92m"
-CY="\033[1;36m"
-CL="\033[m"
+YW="\033[1;33m"  # Bold Yellow
+GN="\033[1;92m"  # Bold Green
+RD="\033[01;31m" # Bold Red
+CY="\033[1;36m"  # Bold Cyan
+CL="\033[m"      # Clear
 # Example on how to use: echo -e "${YW}Yellow text!${CL}"
 
 ############
@@ -233,6 +234,32 @@ function check_ufw {
 		((labmaxscore+=2))
 	fi
 }
+###########################################
+### A. E. ###
+# 2025-10-28 - Adding a function to draw boxes
+# Example: draw_box <Text> <Width> <Border_colour>
+
+function draw_box {
+     text="$1"
+     width="$2"
+     box_color="$3"
+	# Create the top border with red asterisks
+	printf "${box_color}%-${width}s${CL}\n" "$(printf '%*s' "$width" '' | tr ' ' '*')"
+
+	# Print the text inside the box, wrapping to fit the specified width
+	# fold -s -w $((width - 4)):
+	#     -s ensures that the text is wrapped at word boundaries.
+	#     -w $((width - 4)) sets the width to account for the leading and trailing asterisks and spaces (the box's s>
+
+	echo "$text" | fold -s -w $((width - 4)) | while read -r line; do
+   		printf "${box_color}*${CL} %-$((width - 4))s ${box_color}*${CL}\n" "$line"
+	done
+
+	# Create the bottom border with red asterisks
+	printf "${box_color}%-${width}s${CL}\n" "$(printf '%*s' "$width" '' | tr ' ' '*')"
+}
+
+
 
 ############
 # Main
@@ -296,7 +323,7 @@ while [ $# -gt 0 ]; do
 done
 
 if [ "$skipUpdate" = "no" ]; then
-	echo "Checking if script is up to date, please wait"
+	echo "Checking if the script is up to date, please wait..."
 	### A.E. ### The update path is hard-coded. Make this dynamic, and possibly allow multiple sources
 	# wget -nv -O /root/server-check-new.sh https://zonzorp.github.io/COMP1071/server-check.sh >& /dev/null
 	wget -nv -O /root/server-check-new.sh $servercheckURL >& /dev/null
@@ -311,17 +338,31 @@ if [ "$skipUpdate" = "no" ]; then
 		exit
 	else
 		rm /root/server-check-new.sh
+		echo -e "${YW}Did not detect changes to the script.${CL}"
 	fi
 fi
 
-cat <<EOF
-This script will check various parts of your server to see if you have completed
-the setup of the various services and configuration as instructed during the semester.
-***********************!!!!!!!!!!*********************
-It is expected that you use lower case only whenever you use your name as part of
-your server configuration, for username, domain name, etc.
-***********************!!!!!!!!!!*********************
-EOF
+#cat <<EOF
+#This script will check various parts of your server to see if you have completed
+#the setup of the various services and configuration as instructed during the semester.
+#***********************!!!!!!!!!!*********************
+#It is expected that you use lower case only whenever you use your name as part of
+#your server configuration, for username, domain name, etc.
+#***********************!!!!!!!!!!*********************
+#EOF
+#echo ""
+#echo -e "This script will check various parts of your server to see if you have completed the"
+#echo -e "setup of the various services and configuration as instructed during the semester."
+#echo -e "${RD}*******************************! WARNING !*******************************${CL}"
+#echo -e "${RD}*${CL} It is expected that you ${YW}use lower case only ${CL} whenever you use your    ${RD}*${CL}"
+#echo -e "${RD}*${CL} name as part of your server configuration, for username, domain       ${RD}*${CL}"
+#echo -e "${RD}*${CL} name, etc.                                                            ${RD}*${CL}"
+#echo -e "${RD}*************************************************************************${CL}"
+#echo ""
+
+### A. E. ### 
+# Using the new draw_box function instead of echo, cat, and printf
+draw_box "It is expected that you use lower case only whenever you use your name as part of your server configuration, for username, domain name, etc." 80 ${RD}
 
 while [ "$firstname" = "" ]; do
 	read -p "Your first name? " firstname
