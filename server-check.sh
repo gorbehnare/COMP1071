@@ -90,6 +90,7 @@ function problem-report {
         ## A.E. ## 2025-10-31 
         echo "$1" >> $logfile
         echo -e "${RD}>>> Problem found:${CL} $1"
+		((problems++))
 
 }
 
