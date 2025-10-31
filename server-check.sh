@@ -48,6 +48,8 @@ score=0
 labscore=0
 labmaxscore=0
 maxscore=0
+## A.E. ### Added new variable for screenshot
+problems=0
 ### A.E. ### These are hard-coded, could be better to allow other instructors to use their own, or be able to remove this
 # labscoresURL="https://zonzorp.net/gc/postlabscores.php"
 ### A.E. ### Added variable for source update
@@ -84,7 +86,11 @@ function usage {
 }
 
 function problem-report {
-	tee -a $logfile <<< ">>> Problem found: $1"
+        # tee -a $logfile <<< ">>> Problem found: $1"
+        ## A.E. ## 2025-10-31 
+        echo "$1" >> $logfile
+        echo -e "${RD}>>> Problem found:${CL} $1"
+
 }
 
 function verbose-report {
@@ -1209,3 +1215,16 @@ else
 fi
 fi
 # leave the logfile in place for troubleshooting
+## A.E. ### The following used to get screenshots instead of automatic submission. Students are liable for submitting 
+# the full output of the entire script, so just submitting this is not yet sufficient. 
+echo ""
+echo -e "${GN}+--------------- Lab Score Report for $course ---------------${CL}"
+echo -e "${GN}| ${CY}Student ID: ${YW}$studentnumber${CL}"
+echo -e "${GN}| ${CY}Name: ${YW}$firstname $lastname${CL}"
+echo -e "${GN}| ${CY}Date: ${YW}`TZ=America/New_York date`${CL}"
+echo -e "${GN}| ${CY}Semester: ${YW} $semester ${CL}"
+echo -e "${GN}| ${CY}Total Score:${YW} $score/$maxscore ${CL}"
+if [ "$problems" -gt "0" ]; then
+echo -e "${GN}| ${RD}Problems Found: $problems${CL}, the score may be inaccurate!"
+fi
+echo -e "${GN}+------------------------------------------------------------${CL}"
