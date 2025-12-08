@@ -6,7 +6,7 @@ https://gorbehnare.github.io/COMP1071/
 - [01 - Linux System Administration Overview](./01%20-%20Linux%20System%20Administration%20Overview.html)
 - [02 - NIC Configuration (Review)](./02%20-%20NIC%20Configuration.html)
 - [03 - Networking and Tools](./03%20-%20Networking%20and%20Tools.html)
-- 04 - DNS Service
+- [04 - DNS Service](./04%20-%20DNS%20Service.html)
 - 05 - Apache Web Server
 - 06 - Apache with TLS
 - 07 - MySQL Server
@@ -21,7 +21,7 @@ https://gorbehnare.github.io/COMP1071/
 - [Lab 03 - DNS](./Assignments/Lab%2003%20-%20DNS.html)
 - [Lab 04 - Apache2 HTTP Server](./Assignments/Lab%2004%20-%20Apache2%20HTTP%20Server.html)
 - Lab 05 - Apache with SSL
-- Lab 06 - MySQL Server
+- Lab 06 - MySQ L Server
 - Lab 07 - CUPS
 - Lab 08 - Email
 - Lab 09 - FTP and SAMBA
