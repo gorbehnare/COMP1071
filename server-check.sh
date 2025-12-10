@@ -827,7 +827,12 @@ if [ "$?" = "0" ]; then
 	verbose-report "Certificate filename in site file is $certfile"
 	verbose-report "Key filename in site file is $keyfile"
 	EASYRSADIR=/etc/openvpn/easy-rsa
-	if [[ "$VERSION_ID" = "20.04" ]]; then
+	### A.E. ### 
+	# Current Ubuntu version is 24.04, for now check for this version as well
+	# Will have to revisit when 26.04 is released
+	# Maybe an alternative method: ChatGPT 4oMini suggested using if (( $(echo "$VERSION_ID >= 20.04" | bc -l) )); then
+	# if [[ "$VERSION_ID" = "20.04" ]]; then
+	if [[ "$VERSION_ID" = "20.04" || "$VERSION_ID" = "24.04" ]]; then
 		CAKEYDIR=$EASYRSADIR/pki/private
 		CACRT=$EASYRSADIR/pki/ca.crt
 		CAKEY=$CAKEYDIR/ca.key
@@ -1229,4 +1234,4 @@ if [ "$problems" -gt "0" ]; then
 echo -e "${GN}| ${RD}Problems Found: $problems${CL}, the score may be inaccurate!"
 echo -e "${GN}| ${YW}Please make sure to include the full output in your submission!${CL}"
 fi
-echo -e "${GN}+----------------------------------------------------------------${CL}"
+echo -e "${GN}+-----------------------------------------------------------------${CL}"
