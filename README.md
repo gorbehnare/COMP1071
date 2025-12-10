@@ -20,7 +20,7 @@ https://gorbehnare.github.io/COMP1071/
 - [Lab 02 - Network Configuration](./Assignments/Lab%2002%20-%20Network%20Configuration.html)
 - [Lab 03 - DNS](./Assignments/Lab%2003%20-%20DNS.html)
 - [Lab 04 - Apache2 HTTP Server](./Assignments/Lab%2004%20-%20Apache2%20HTTP%20Server.html)
-- [Lab 05 - Apache with SSL]((./Assignments/Lab%2005%20-%20Apache%20with%20SSL.html)
+- [Lab 05 - Apache with SSL](./Assignments/Lab%2005%20-%20Apache%20with%20SSL.html)
 - Lab 06 - MySQ L Server
 - Lab 07 - CUPS
 - Lab 08 - Email
