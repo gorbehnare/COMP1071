@@ -1236,7 +1236,7 @@ echo -e "${GN}| ${RD}Problems Found: $problems${CL}, the score may be inaccurate
 echo -e "${GN}| ${YW}Please make sure to include the full output in your submission!${CL}"
 fi
 ## A.E ###
-# Attempting to provide a score verification method
+# Attempting to provide a simple and lazy score verification method
 VERIFICATION_DATA="$studentnumber, $firstname, $lastname, $time_date, $score, $maxscore"
 hash=$(echo -n "$VERIFICATION_DATA" | sha256sum | awk '{print $1}')
 echo -e "${GN}| ${YW}Hash:${CL} $hash"
