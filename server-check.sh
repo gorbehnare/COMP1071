@@ -1230,15 +1230,15 @@ echo -e "${GN}| ${CY}Student ID: ${YW}$studentnumber${CL}"
 echo -e "${GN}| ${CY}Name: ${YW}$firstname $lastname${CL}"
 echo -e "${GN}| ${CY}Date: ${YW}$time_date ${CL}"
 echo -e "${GN}| ${CY}Semester: ${YW} $semester ${CL}"
-echo -e "${GN}| ${CY}Total Score:${YW} $score/$maxscore ${CL}"
 if [ "$problems" -gt "0" ]; then
-echo -e "${GN}| ${RD}Problems Found: $problems${CL}, the score may be inaccurate!"
-echo -e "${GN}| ${YW}Please make sure to include the full output in your submission!${CL}"
+	echo -e "${GN}| ${RD}Problems Found: $problems${CL}, Total score may be inaccurate!"
+	echo -e "${GN}| ${YW}Please make sure to include the full output in your submission!${CL}"
+else
+	echo -e "${GN}| ${CY}Total Score:${YW} $score/$maxscore ${CL}"
+	# Attempting to provide a simple and lazy score verification method
+	VERIFICATION_DATA="$studentnumber, $firstname, $lastname, $time_date, $score, $maxscore"
+	hash=$(echo -n "$VERIFICATION_DATA" | sha256sum | awk '{print $1}')
+	echo -e "${GN}| ${YW}Hash:${CL} $hash"
 fi
-## A.E ###
-# Attempting to provide a simple and lazy score verification method
-VERIFICATION_DATA="$studentnumber, $firstname, $lastname, $time_date, $score, $maxscore"
-hash=$(echo -n "$VERIFICATION_DATA" | sha256sum | awk '{print $1}')
-echo -e "${GN}| ${YW}Hash:${CL} $hash"
-## ## ## ##
+
 echo -e "${GN}+-----------------------------------------------------------------${CL}"
