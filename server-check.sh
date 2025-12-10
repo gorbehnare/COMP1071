@@ -1222,16 +1222,23 @@ fi
 fi
 # leave the logfile in place for troubleshooting
 ## A.E. ### The following used to get screenshots instead of automatic submission. Students are liable for submitting 
-# the full output of the entire script, so just submitting this is not yet sufficient. 
+# the full output of the entire script, so just submitting this section is not yet sufficient. 
+time_date=`TZ=America/New_York date`
 echo ""
 echo -e "${GN}+----------------- Lab Score Report for $course -----------------${CL}"
 echo -e "${GN}| ${CY}Student ID: ${YW}$studentnumber${CL}"
 echo -e "${GN}| ${CY}Name: ${YW}$firstname $lastname${CL}"
-echo -e "${GN}| ${CY}Date: ${YW}`TZ=America/New_York date`${CL}"
+echo -e "${GN}| ${CY}Date: ${YW}$time_date ${CL}"
 echo -e "${GN}| ${CY}Semester: ${YW} $semester ${CL}"
 echo -e "${GN}| ${CY}Total Score:${YW} $score/$maxscore ${CL}"
 if [ "$problems" -gt "0" ]; then
 echo -e "${GN}| ${RD}Problems Found: $problems${CL}, the score may be inaccurate!"
 echo -e "${GN}| ${YW}Please make sure to include the full output in your submission!${CL}"
 fi
+## A.E ###
+# Attempting to provide a score verification method
+VERIFICATION_DATA="$studentnumber, $firstname, $lastname, $time_date, $score, $maxscore"
+hash=$(echo -n "$VERIFICATION_DATA" | sha256sum | awk '{print $1}')
+echo -e "${GN}| ${YW}Hash:${CL} $hash"
+## ## ## ##
 echo -e "${GN}+-----------------------------------------------------------------${CL}"
