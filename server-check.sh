@@ -11,31 +11,13 @@
 ############
 # Todo
 ############
-# Lab 1:
-# add tree, glances, and htop packages to lab and slides
-# modify default user homedir to only have Documents, Pictures, Downloads, .bash_login
-### A.E. ### 2025-09-19: Modified lab 1 to check only for bin, Documents, Pictures, and public_html (not Downloads)
-# make changes to home dir and PATH before installing packages, so that sl and fortune work better
-# change package name for fortune to fortune-mod
-# .bash_login should source ~/.profile
-# get rid of adduser example and only keep useradd version (### A.E. ### to accomodate Redhat/Centos, but CentOS is now "gone")
-
-### A.E. ### IBM bought RedHat and Centos is no longer a good fit for us (unstable only). Should we accomodate this any longer?
-# to accomodate centos-7:
-#   apt to yum, dpkg to rpm
-#   to add pkgs.org repo, do wget http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-9.noarch.rpm;rpm -i epel*
-#   no memstat for centos, consider dropping memstat
-#   fortune-mod is required name for fortune package
-#   distinction between useradd and adduser lost in centos
-#   add install of lshw package
-#   changing /etc/hostname file immediately changes hostname, update slides
-# wheel group instead of sudo group
+#
 
 ############
 # Ideas for Enhancements
 ############
-
 # add an ssh key to allow remote connections for student login for me to use
+# Refactor the script to remove out-dated and old components and checks. For example remove support for older OS and Software versions
 
 ############
 # Variables
@@ -972,16 +954,13 @@ if [ "$dbinstalled" = 1 ]; then
 		((labscore++))
 	fi
 	((labmaxscore++))
-	package_checks "phpmyadmin webmin"
+### A.E. ### Deprecate Webmin
+#	package_checks "phpmyadmin webmin"
+	package_checks "phpmyadmin"
 # check for mysqldump output file
-	if [ ! -s /root/mysql-backup.sql ]; then
-		if [ ! -s /root/mysql-backup.sql ]; then
-			problem-report "mysql-backup.sql not found"
-			problem-report "Review the instructions for using mysqldump to create the mysql-backup.sql file"
-		else
-			verbose-report "mysql-backup.sql found ok"
-			((labscore+=2))
-		fi
+	if [ -s /root/mysql-backup.sql ]; then
+		problem-report "mysql-backup.sql not found under /root"
+		problem-report "Review the instructions for using mysqldump to create the mysql-backup.sql file"
 	else
 		verbose-report "mysql-backup.sql found ok"
 		((labscore+=2))
@@ -989,17 +968,20 @@ if [ "$dbinstalled" = 1 ]; then
 	((labmaxscore+=2))
 	if [ ! -s /home/$firstname/tester-backup.sql ]; then
 		if [ ! -s /root/tester-backup.sql ]; then
-			problem-report "tester-backup.sql not found"
+			problem-report "tester-backup.sql not found under /root"
 			problem-report "Review the instructions for using mysqldump to create the tester-backup.sql file"
 		else
 			verbose-report "tester-backup.sql found ok"
-			((labscore+=2))
+			### A.E. ### Increased score from 2 points to 3 points
+			((labscore+=3))
 		fi
 	else
 		verbose-report "tester-backup.sql found ok"
-		((labscore+=2))
+                ### A.E. ### Increased score from 2 points to 3 points
+		((labscore+=3))
 	fi
-	((labmaxscore+=2))
+	### A.E. ### Increased score from 2 points to 3 points
+	((labmaxscore+=3))
 
 # check for user tester with employees database
 	mysql -u tester --password=tester tester <<< "show columns in location;" >&/dev/null
@@ -1024,17 +1006,19 @@ if [ "$dbinstalled" = 1 ]; then
 		((labscore+=2))
 	fi
 	((labmaxscore+=2))
-	wget -O - --no-check-certificate https://$hostname:10000 >&/dev/null
-	if [ $? != "0" ]; then
-		problem-report "Unable to retrieve webmin web page from $hostname"
-		problem-report "Try apachectl configtest and wget -O - --no-check-certificate https://$hostname:10000 to diagnose"
-	else
-		verbose-report "webmin site web page ok"
-		((labscore+=3))
-	fi
-	((labmaxscore+=3))
+	### A.E. ### Deprecate Webmin
+	#wget -O - --no-check-certificate https://$hostname:10000 >&/dev/null
+	#if [ $? != "0" ]; then
+	#	problem-report "Unable to retrieve webmin web page from $hostname"
+	#	problem-report "Try apachectl configtest and wget -O - --no-check-certificate https://$hostname:10000 to diagnose"
+	#else
+	#	verbose-report "webmin site web page ok"
+	#	((labscore+=3))
+	#fi
+	#((labmaxscore+=3))
 	check_ufw MySQL 3306/tcp
-	check_ufw webmin 10000/tcp
+	### A.E. ### Deprecate Webmin
+	#check_ufw webmin 10000/tcp
 	scores-report "Lab 06 score is $labscore out of $labmaxscore"
 	score=$((score + labscore))
 	maxscore=$((maxscore + labmaxscore))
@@ -1223,7 +1207,7 @@ fi
 # leave the logfile in place for troubleshooting
 ## A.E. ### The following used to get screenshots instead of automatic submission. Students are liable for submitting 
 # the full output of the entire script, so just submitting this section is not yet sufficient. 
-time_date=`TZ=America/New_York date`
+time_date=`TZ=America/New_York date` # Pretty date and time in localtime
 echo ""
 echo -e "${GN}+----------------- Lab Score Report for $course -----------------${CL}"
 echo -e "${GN}| ${CY}Student ID: ${YW}$studentnumber${CL}"
@@ -1233,12 +1217,12 @@ echo -e "${GN}| ${CY}Semester: ${YW} $semester ${CL}"
 if [ "$problems" -gt "0" ]; then
 	echo -e "${GN}| ${RD}Problems Found: $problems${CL}, Total score may be inaccurate!"
 	echo -e "${GN}| ${YW}Please make sure to include the full output in your submission!${CL}"
+	echo -e "${GN}| ${CY}Total Score:${RD} $score/$maxscore ${CL}"
 else
 	echo -e "${GN}| ${CY}Total Score:${YW} $score/$maxscore ${CL}"
-	# Attempting to provide a simple and lazy score verification method
-	VERIFICATION_DATA="$studentnumber, $firstname, $lastname, $time_date, $score, $maxscore"
-	hash=$(echo -n "$VERIFICATION_DATA" | sha256sum | awk '{print $1}')
-	echo -e "${GN}| ${YW}Hash:${CL} $hash"
 fi
-
+# Attempting to provide a simple and lazy score verification method
+VERIFICATION_DATA="$studentnumber, $firstname, $lastname, $time_date, $score, $maxscore"
+hash=$(echo -n "$VERIFICATION_DATA" | sha256sum | awk '{print $1}')
+echo -e "${GN}| ${YW}Hash:${CL} $hash"
 echo -e "${GN}+-----------------------------------------------------------------${CL}"
