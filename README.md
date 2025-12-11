@@ -21,7 +21,7 @@ https://gorbehnare.github.io/COMP1071/
 - [Lab 03 - DNS](./Assignments/Lab%2003%20-%20DNS.html)
 - [Lab 04 - Apache2 HTTP Server](./Assignments/Lab%2004%20-%20Apache2%20HTTP%20Server.html)
 - [Lab 05 - Apache with SSL](./Assignments/Lab%2005%20-%20Apache%20with%20SSL.html)
-- Lab 06 - MySQ L Server
+- [Lab 06 - MySQL Server](./Assignments/Lab%2006%20-%20MySQL%20Server.html)
 - Lab 07 - CUPS
 - Lab 08 - Email
 - Lab 09 - FTP and SAMBA
