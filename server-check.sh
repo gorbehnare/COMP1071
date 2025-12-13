@@ -1043,6 +1043,11 @@ if [ "$?" = "0" ]; then
 	check_config_file /etc/cups/cupsd.conf WebInterface Yes
 	check_config_file /etc/cups/cups-pdf.conf TitlePref 1
 	check_config_file /etc/cups/cups-pdf.conf Label 2
+    ### A.E. ### 2025-12-12: Added Additional Procedures regarding the Web UI 
+    #### Beginning the additional Procedures Checks ####
+    check_config_file /etc/cups/cupsd.conf Allow "from 192.168.*.0/24"
+    check_config_file /etc/cups/cupsd.conf '<Location' '/printers>'
+    check_config_file /etc/cups/cupsd.conf '<Location' '/jobs>'
 	lpstat -p PDF >&/dev/null
 	if [ $? = "0" -a "$labnum" ]; then
 		verbose-report "PDF printer queue found ok"
@@ -1070,6 +1075,25 @@ if [ "$?" = "0" ]; then
 		((labscore++))
 	fi
 	((labmaxscore++))
+	wget -O - http://localhost:631/printers >&/dev/null
+	if [ $? != "6" ]; then
+                problem-report "Unable to reach, or getting unauthenticated access to /printers"
+                problem-report "Try accessing http://yourip:631/printers to diagnose"
+    else
+                verbose-report "CUPS /printers in web interface ok"
+                ((labscore++))
+    fi
+        ((labmaxscore++))
+	wget -O - http://localhost:631/jobs >&/dev/null
+	if [ $? != "6" ]; then
+                problem-report "Unable to reach, or getting unauthenticated access to /jobs"
+                problem-report "Try accessing http://yourip:631/jobs to diagnose"
+    else
+                verbose-report "CUPS /jobs in web interface ok"
+                ((labscore++))
+    fi
+    ((labmaxscore++))
+    ####### End of Additional Procedures Check ####
 	check_ufw IPP 631
 	check_ufw Bonjour 5353
 ## Removed comented code for cleanup
