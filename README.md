@@ -1,6 +1,6 @@
 # COMP1071
 Site to host HTML version of updated labs and other course material.
-https://gorbehnare.github.io/COMP1071/
+[https://gorbehnare.github.io/COMP1071/]
 
 ## Table of Content:
 - [01 - Linux System Administration Overview](./01%20-%20Linux%20System%20Administration%20Overview.html)
@@ -23,5 +23,5 @@ https://gorbehnare.github.io/COMP1071/
 - [Lab 05 - Apache with SSL](./Assignments/Lab%2005%20-%20Apache%20with%20SSL.html)
 - [Lab 06 - MySQL Server](./Assignments/Lab%2006%20-%20MySQL%20Server.html)
 - [Lab 07 - CUPS](./Assignments/Lab%2007%20-%20CUPS.html)
-- Lab 08 - Email
+- [Lab 08 - Email Services](./Assignments/Lab%2008%20-%20Email%20Services.html)
 - Lab 09 - FTP and SAMBA

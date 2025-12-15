@@ -1,0 +1,1088 @@
+
+				
+				<html>
+					<head>
+						<meta charset="UTF-8"/>
+						<meta name="viewport" content="width=device-width, initial-scale=1"/>
+						<style>.jsdraw--editButton {
+  display: none;
+  width: min-content;
+  max-height: 50px;
+  z-index: 1;
+  opacity: 0.9;
+  align-self: flex-end;
+  justify-self: right;
+}
+
+.jsdraw--svgWrapper {
+  display: inline-grid;
+}
+
+.jsdraw--svgWrapper > * {
+  grid-row: 1;
+  grid-column: 1;
+}
+
+.jsdraw--svgWrapper:hover .jsdraw--editButton,
+.jsdraw--svgWrapper:focus .jsdraw--editButton,
+.jsdraw--svgWrapper:focus-within .jsdraw--editButton,
+.jsdraw--editButton:focus {
+  display: block;
+}</style><style>pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em;
+}
+
+code.hljs {
+  padding: 3px 5px;
+}
+
+/*
+
+Atom One Light by Daniel Gamage
+Original One Light Syntax theme from https://github.com/atom/one-light-syntax
+
+base:    #fafafa
+mono-1:  #383a42
+mono-2:  #686b77
+mono-3:  #a0a1a7
+hue-1:   #0184bb
+hue-2:   #4078f2
+hue-3:   #a626a4
+hue-4:   #50a14f
+hue-5:   #e45649
+hue-5-2: #c91243
+hue-6:   #986801
+hue-6-2: #c18401
+
+*/
+
+.hljs {
+  color: #383a42;
+  background: #fafafa;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #a0a1a7;
+  font-style: italic;
+}
+
+.hljs-doctag,
+.hljs-keyword,
+.hljs-formula {
+  color: #a626a4;
+}
+
+.hljs-section,
+.hljs-name,
+.hljs-selector-tag,
+.hljs-deletion,
+.hljs-subst {
+  color: #e45649;
+}
+
+.hljs-literal {
+  color: #0184bb;
+}
+
+.hljs-string,
+.hljs-regexp,
+.hljs-addition,
+.hljs-attribute,
+.hljs-meta .hljs-string {
+  color: #50a14f;
+}
+
+.hljs-attr,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-type,
+.hljs-selector-class,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-number {
+  color: #986801;
+}
+
+.hljs-symbol,
+.hljs-bullet,
+.hljs-link,
+.hljs-meta,
+.hljs-selector-id,
+.hljs-title {
+  color: #4078f2;
+}
+
+.hljs-built_in,
+.hljs-title.class_,
+.hljs-class .hljs-title {
+  color: #c18401;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+.hljs-link {
+  text-decoration: underline;
+}</style>
+						<title>Lab 08 - Email Services</title>
+					</head>
+					<body>
+						<div class="exported-note"><div class="exported-note-title">Lab 08 - Email Services</div>
+
+<style>
+		/* https://necolas.github.io/normalize.css/ */
+		html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}
+		article,aside,footer,header,nav,section{display:block}h1{font-size:2em;margin:.67em 0}hr{box-sizing:content-box;height:0;overflow:visible}
+		pre{font-family:monospace,monospace;font-size:1em}a{background-color:transparent;-webkit-text-decoration-skip:objects}
+		b,strong{font-weight:bolder}small{font-size:80%}img{border-style:none}
+
+		body {
+			font-size: 15px;
+			color: #32373F;
+			word-wrap: break-word;
+			line-height: 1.6em;
+			background-color: #ffffff;
+			font-family: 'Avenir Next', 'Avenir', 'Arial', sans-serif;
+			padding-bottom: 0px;
+			padding-top: 0px;
+		}
+		kbd {
+			border: 1px solid rgb(220, 220, 220);
+			box-shadow: inset 0 -1px 0 rgb(220, 220, 220);
+			padding: 2px 4px;
+			border-radius: 3px;
+			background-color: rgb(243, 243, 243);
+		}
+
+		:root {
+			--scrollbar-size: 7px;
+		}
+
+		::-webkit-scrollbar {
+			width: var(--scrollbar-size);
+			height: var(--scrollbar-size);
+		}
+		::-webkit-scrollbar-thumb {
+			border-radius: calc(var(--scrollbar-size) / 2);
+		}
+		::-webkit-scrollbar-corner {
+			background: none;
+		}
+		::-webkit-scrollbar-track {
+			border: none;
+		}
+		::-webkit-scrollbar-thumb {
+			background: rgba(50, 55, 63, 0.54); 
+		}
+		::-webkit-scrollbar-track:hover {
+			background: rgba(0, 0, 0, 0.1); 
+		}
+		::-webkit-scrollbar-thumb:hover {
+			background: rgba(50, 55, 63, 0.63); 
+		}
+
+		
+
+		/* Remove top padding and margin from first child so that top of rendered text is aligned to top of text editor text */
+
+		#rendered-md > h1:first-child,
+		#rendered-md > h2:first-child,
+		#rendered-md > h3:first-child,
+		#rendered-md > h4:first-child,
+		#rendered-md > ul:first-child,
+		#rendered-md > ol:first-child,
+		#rendered-md > table:first-child,
+		#rendered-md > blockquote:first-child,
+		#rendered-md > img:first-child,
+		#rendered-md > p:first-child {
+			margin-top: 0;
+			padding-top: 0;
+		}
+		
+		p, h1, h2, h3, h4, h5, h6, ul, table {
+			margin-top: .6em;
+			margin-bottom: 1.35em;
+
+			/*
+				Adds support for RTL text in the note body. It automatically detects the direction using the content.
+				Issue: https://github.com/laurent22/joplin/issues/3991
+			*/
+			unicode-bidi: plaintext;
+		}
+
+		h1, h2, h3, h4, h5, h6, ul, table {
+			margin-bottom: 0.65em;
+		}
+
+		h1, h2, h3, h4, h5, h6 {
+			line-height: 1.5em;
+		}
+		h1 {
+			font-size: 1.5em;
+			font-weight: bold;
+			border-bottom: 1px solid #dddddd;
+			padding-bottom: .3em;
+		}
+		h2 {
+			font-size: 1.3em;
+			font-weight: bold;
+			padding-bottom: .1em; */
+		}
+		h3 {
+			font-size: 1.1em;
+			font-weight: bold;
+		}
+		h4, h5, h6 {
+			font-size: 1em;
+			font-weight: bold;
+		}
+
+		.exported-note-title {
+			font-size: 2em;
+			font-weight: bold;
+			margin-bottom: 0.8em;
+			line-height: 1.5em;
+			padding-bottom: .35em;
+			border-bottom: 1px solid #dddddd;
+		}
+
+		a {
+			color: #155BDA;
+		}
+		ul, ol {
+			padding-left: 0;
+			margin-left: 1.7em;
+		}
+		li {
+			margin-bottom: .4em;
+		}
+		li p {
+			margin-top: 0.2em;
+			margin-bottom: 0;
+		}
+
+		dt {
+			font-weight: bold;
+			margin-bottom: 0.25em;
+		}
+
+		dd {
+			margin-inline-start: 2.5em;
+			margin-bottom: 0.5em;
+		}
+
+		.resource-icon {
+			display: inline-block;
+			position: relative;
+			top: 0.3em;
+			text-decoration: none;
+			width: 1.2em;
+			height: 1.4em;
+			margin-right: 0.4em;
+			background-color:  #155BDA;
+		}
+    /* These icons are obtained from the wonderful ForkAwesome project by copying the src svgs 
+     * into the css classes below.
+     * svgs are obtained from https://github.com/ForkAwesome/Fork-Awesome/tree/master/src/icons/svg
+     * instead of the svg width, height property you must use a viewbox here, 0 0 1536 1792 is typically the actual size of the icon
+     * each line begins with the pre-amble -webkit-mask: url("data:image/svg+xml;utf8,
+     * and of course finishes with ");
+     * to prevent artifacts it is also necessary to include -webkit-mask-repeat: no-repeat;
+     * on the following line
+     * */
+		.fa-joplin {
+			/* Awesome Font file */
+			-webkit-mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'><path d='M373.834 128C168.227 128 0 296.223 0 501.834v788.336C0 1495.778 168.227 1664 373.834 1664h788.336c205.608 0 373.83-168.222 373.83-373.83V501.834C1536 296.224 1367.778 128 1162.17 128zm397.222 205.431h417.424a7.132 7.132 0 0 1 7.132 7.133v132.552c0 4.461-3.619 8.073-8.077 8.073h-57.23c-24.168 0-43.768 19.338-44.284 43.374v2.377h-.017v136.191h-.053l-.466 509.375c-5.02 77.667-39.222 149.056-96.324 201.046-60.28 54.834-141.948 85.017-229.962 85.017-12.45 0-25.208-.61-37.907-1.785-92.157-8.682-181.494-48.601-251.662-112.438-71.99-65.517-117.147-150.03-127.164-238-11.226-98.763 23.42-192.783 95.045-257.937 81.99-74.637 198.185-101.768 316.613-75.704 5.574 1.227 9.55 6.282 9.55 11.997v199.52c-.199 2.625-1.481 6.599-8.183 2.896-.663-.365-1.194-.511-1.653-.531-21.987-10.587-45.159-17.57-68.559-19.916-.38-.04-.757-.124-1.138-.163-.537-.048-1.034-.033-1.556-.075-4.13-.354-8.183-.517-12.203-.58-.87-.011-1.771-.127-2.641-.127-.486 0-.951.05-1.437.057-1.464.011-2.886.115-4.33.163-2.76.102-5.497.211-8.182.448-.273.024-.547.07-.835.097-25.509 2.4-47.864 11.104-65.012 25.47-.954.802-1.974 1.53-2.9 2.36a1.34 1.34 0 0 1-.168.146c-23.96 21.8-34.881 53.872-30.726 90.316 4.62 40.737 26.94 81.156 62.841 113.823 35.908 32.67 80.335 52.977 125.113 57.186 35.118 3.36 66.547-3.919 89.899-20.461a97.255 97.255 0 0 0 9.365-7.501c2.925-2.661 5.569-5.5 8.086-8.416.3-.348.672-.673.975-1.024 8.253-9.864 14.222-21.067 17.996-33.148.639-2.034 1.051-4.148 1.564-6.227.381-1.563.81-3.106 1.112-4.693.555-2.784.923-5.632 1.253-8.49.086-.709.183-1.414.237-2.128.492-4.893.693-9.858.55-14.91h.013V521.623c-2.01-22.626-20.78-40.434-43.928-40.434h-57.23a8.071 8.071 0 0 1-8.077-8.073V340.564a7.132 7.132 0 0 1 7.136-7.133z'/></svg>");
+		}
+		.fa-file-image {
+			-webkit-mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'><path d='M1468 380c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H128v1536h1280zm-128-448v320H256v-192l192-192 128 128 384-384zm-832-192c-106 0-192-86-192-192s86-192 192-192 192 86 192 192-86 192-192 192z'/></svg>");
+      -webkit-mask-repeat: no-repeat;
+		}
+		.fa-file-pdf {
+			-webkit-mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'><path d='M1468 380c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H128v1536h1280zm-514-593c25 20 53 38 84 56 42-5 81-7 117-7 67 0 152 8 177 49 7 10 13 28 2 52-1 1-2 3-3 4v1c-3 18-18 38-71 38-64 0-161-29-245-73-139 15-285 46-392 83-103 176-182 262-242 262-10 0-19-2-28-7l-24-12c-3-1-4-3-6-5-5-5-9-16-6-36 10-46 64-123 188-188 8-5 18-2 23 6 1 1 2 3 2 4 31-51 67-116 107-197 45-90 80-178 104-262-32-109-42-221-24-287 7-25 22-40 42-40h22c15 0 27 5 35 15 12 14 15 36 9 68-1 3-2 6-4 8 1 3 1 5 1 8v30c-1 63-2 123-14 192 35 105 87 190 146 238zm-576 411c30-14 73-57 137-158-75 58-122 124-137 158zm398-920c-10 28-10 76-2 132 3-16 5-31 7-44 2-17 5-31 7-43 1-3 2-5 4-8-1-1-1-3-2-5-1-18-7-29-13-36 0 2-1 3-1 4zm-124 661c88-35 186-63 284-81-10-8-20-15-29-23-49-43-93-103-127-176-19 61-47 126-83 197-15 28-30 56-45 83zm646-16c-5-5-31-24-140-24 49 18 94 28 124 28 9 0 14 0 18-1 0-1-1-2-2-3z'/></svg>");
+      -webkit-mask-repeat: no-repeat;
+		}
+		.fa-file-word {
+			-webkit-mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'><path d='M1468 380c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H128v1536h1280zM233 768v107h70l164 661h159l128-485c5-15 8-30 10-46 1-8 2-16 2-24h4l3 24c3 14 4 30 9 46l128 485h159l164-661h70V768h-300v107h90l-99 438c-4 16-6 33-7 46l-2 21h-4c0-6-2-14-3-21-3-13-5-30-9-46L825 768H711l-144 545c-4 16-5 33-8 46l-4 21h-4l-2-21c-1-13-3-30-7-46l-99-438h90V768H233z'/></svg>");
+      -webkit-mask-repeat: no-repeat;
+		}
+		.fa-file-powerpoint {
+			-webkit-mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'><path d='M1468 380c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H128v1536h1280zm-992-234v106h327v-106h-93v-167h137c43 0 82-2 118-15 90-31 146-124 146-233s-54-193-137-228c-38-15-84-19-130-19H416v107h92v555h-92zm353-280H650V882h120c35 0 62 6 83 18 36 21 56 62 56 115 0 56-20 99-62 120-21 10-47 15-78 15z'/></svg>");
+      -webkit-mask-repeat: no-repeat;
+		}
+		.fa-file-excel {
+			-webkit-mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'><path d='M1468 380c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H128v1536h1280zm-979-234v106h281v-106h-75l103-161c12-19 18-34 21-34h2c1 4 3 7 5 10 4 8 10 14 17 24l107 161h-76v106h291v-106h-68l-192-273 195-282h67V768H828v107h74l-103 159c-12 19-21 34-21 33h-2c-1-4-3-7-5-10-4-7-9-14-17-23L648 875h76V768H434v107h68l189 272-194 283h-68z'/></svg>");
+      -webkit-mask-repeat: no-repeat;
+		}
+		.fa-file-audio {
+			-webkit-mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'><path d='M1468 380c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H128v1536h1280zM620 850c12 5 20 17 20 30v544c0 13-8 25-20 30-4 1-8 2-12 2-8 0-16-3-23-9l-166-167H288c-18 0-32-14-32-32v-192c0-18 14-32 32-32h131l166-167c10-9 23-12 35-7zm417 689c19 0 37-8 50-24 83-102 129-231 129-363s-46-261-129-363c-22-28-63-32-90-10-28 23-32 63-9 91 65 80 100 178 100 282s-35 202-100 282c-23 28-19 68 9 90 12 10 26 15 40 15zm-211-148c17 0 34-7 47-20 56-60 87-137 87-219s-31-159-87-219c-24-26-65-27-91-3-25 24-27 65-2 91 33 36 52 82 52 131s-19 95-52 131c-25 26-23 67 2 91 13 11 29 17 44 17z'/></svg>");
+      -webkit-mask-repeat: no-repeat;
+		}
+		.fa-file-video {
+			-webkit-mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'><path d='M1468 380c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H128v1536h1280zM768 768c70 0 128 58 128 128v384c0 70-58 128-128 128H384c-70 0-128-58-128-128V896c0-70 58-128 128-128h384zm492 2c12 5 20 17 20 30v576c0 13-8 25-20 30-4 1-8 2-12 2-8 0-17-3-23-9l-265-266v-90l265-266c6-6 15-9 23-9 4 0 8 1 12 2z'/></svg>");
+      -webkit-mask-repeat: no-repeat;
+		}
+		.fa-file-archive {
+			-webkit-mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'><path d='M640 384V256H512v128h128zm128 128V384H640v128h128zM640 640V512H512v128h128zm128 128V640H640v128h128zm700-388c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H768v128H640V128H128v1536h1280zM781 943c85 287 107 349 107 349 5 17 8 34 8 52 0 111-108 192-256 192s-256-81-256-192c0-18 3-35 8-52 0 0 21-62 120-396V768h128v128h79c29 0 54 19 62 47zm-141 465c71 0 128-29 128-64s-57-64-128-64-128 29-128 64 57 64 128 64z'/></svg>");
+      -webkit-mask-repeat: no-repeat;
+		}
+		.fa-file-code {
+			-webkit-mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'><path d='M1468 380c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H128v1536h1280zM480 768c11-14 31-17 45-6l51 38c14 11 17 31 6 45l-182 243 182 243c11 14 8 34-6 45l-51 38c-14 11-34 8-45-6l-226-301c-8-11-8-27 0-38zm802 301c8 11 8 27 0 38l-226 301c-11 14-31 17-45 6l-51-38c-14-11-17-31-6-45l182-243-182-243c-11-14-8-34 6-45l51-38c14-11 34-8 45 6zm-620 461c-18-3-29-20-26-37l138-831c3-18 20-29 37-26l63 10c18 3 29 20 26 37l-138 831c-3 18-20 29-37 26z'/></svg>");
+      -webkit-mask-repeat: no-repeat;
+		}
+		.fa-file-alt, .fa-file-csv {
+      /* fork-awesome doesn't have csv so we use the text icon */
+			-webkit-mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'><path d='M1468 380c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H128v1536h1280zM384 800c0-18 14-32 32-32h704c18 0 32 14 32 32v64c0 18-14 32-32 32H416c-18 0-32-14-32-32v-64zm736 224c18 0 32 14 32 32v64c0 18-14 32-32 32H416c-18 0-32-14-32-32v-64c0-18 14-32 32-32h704zm0 256c18 0 32 14 32 32v64c0 18-14 32-32 32H416c-18 0-32-14-32-32v-64c0-18 14-32 32-32h704z'/></svg>");
+      -webkit-mask-repeat: no-repeat;
+		}
+		.fa-file {
+			-webkit-mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'><path d='M1468 380c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H128v1536h1280z'/></svg>");
+      -webkit-mask-repeat: no-repeat;
+		}
+		blockquote {
+			border-left: 4px solid rgb(220, 220, 220);
+			padding-left: 1.2em;
+			margin-left: 0;
+			opacity: 0.7;
+		}
+
+		.jop-tinymce table,
+		table {
+			text-align: left;
+			border-collapse: collapse;
+			border: 1px solid rgb(220, 220, 220);
+			background-color: #ffffff;
+		}
+
+		.jop-tinymce table td, .jop-tinymce table th,
+		table td, th {
+			text-align: left;
+			padding: .5em 1em .5em 1em;
+			font-size: 15;
+			color: #32373F;
+			font-family: 'Avenir Next', 'Avenir', 'Arial', sans-serif;
+		}
+
+		.jop-tinymce table td,
+		table td {
+			border: 1px solid rgb(220, 220, 220);
+		}
+
+		.jop-tinymce table th,
+		table th {
+			border: 1px solid rgb(220, 220, 220);
+			border-bottom: 2px solid rgb(220, 220, 220);
+			background-color: rgb(247, 247, 247);
+		}
+
+		.jop-tinymce table tr:nth-child(even),
+		table tr:nth-child(even) {
+			background-color: rgb(247, 247, 247);
+		}
+
+		.jop-tinymce table tr:hover,
+		table tr:hover {
+			background-color: #e5e5e5;
+		}
+
+		hr {
+			border: none;
+			border-bottom: 2px solid #dddddd;
+		}
+		img {
+			max-width: 100%;
+			height: auto;
+		}
+		
+		.inline-code,
+		.mce-content-body code {
+			border: 1px solid rgb(220, 220, 220);
+			background-color: rgb(243, 243, 243);
+			padding-right: .2em;
+			padding-left: .2em;
+			border-radius: .25em;
+			color: rgb(0,0,0);
+			font-size: .9em;
+		}
+
+		.highlighted-keyword {
+			background-color: #F3B717;
+			color: black;
+		}
+
+		
+	.not-loaded-resource img {
+		width: 1.15em;
+		height: 1.15em;
+		background: white;
+		padding: 2px !important;
+		border-radius: 2px;
+		box-shadow: 0 1px 3px #000000aa;
+	}
+
+	a.not-loaded-resource img {
+		margin-right: .2em;
+	}
+
+	a.not-loaded-resource {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+	}
+
+
+		.md-checkbox input[type=checkbox]:checked {
+			opacity: 0.7;
+		}
+
+		.jop-tinymce ul.joplin-checklist .checked,
+		.md-checkbox .checkbox-label-checked {
+			opacity: 0.5;
+		}
+
+		.exported-note {
+			padding: 1em;
+		}
+
+		.joplin-editable .joplin-source {
+			display: none;
+		}
+
+		mark {
+			background: #F7D26E;
+			color: black;
+		}
+
+		/* =============================================== */
+		/* For TinyMCE */
+		/* =============================================== */
+
+		.mce-content-body {
+			/* Note: we give a bit more padding at the bottom, to allow scrolling past the end of the document */
+			padding: 5px 10px 10em 0;
+		}
+
+		/*
+		.mce-content-body code {
+			background-color: transparent;
+		}
+		*/
+
+		.mce-content-body [data-mce-selected=inline-boundary] {
+			background-color: transparent;
+		}
+
+		.mce-content-body .joplin-editable {
+			cursor: pointer !important;
+		}
+
+		.mce-content-body.mce-content-readonly {
+			opacity: 0.5;
+		}
+
+		/* We need that to make sure click events have the A has a target */
+		.katex a span {
+			pointer-events: none;
+		}
+
+		.media-player {
+			width: 100%;
+			margin-top: 10px;
+		}
+
+		.media-player.media-pdf {
+			min-height: 35rem;
+			width: 100%;
+			max-width: 1000px;
+			margin: 0;
+			border: 0;
+			display: block;
+		}
+
+		/* Clear the CODE style if the element is within a joplin-editable block */
+		.mce-content-body .joplin-editable code {
+			border: none;
+			background: none;
+			padding: 0;
+			color: inherit;
+			font-size: inherit;
+		}
+
+		/* To make code blocks horizontally scrollable */
+		/* https://github.com/laurent22/joplin/issues/5740 */
+		pre.hljs {
+			overflow-x: auto;
+		}
+
+		.joplin-table-wrapper{
+			overflow-x: auto;
+			overflow-y: hidden;
+		}
+
+		/* =============================================== */
+		/* For TinyMCE */
+		/* =============================================== */
+
+		@media print {
+			body {
+				height: auto !important;
+			}
+
+			pre {
+				white-space: pre-wrap;
+			}
+
+			.code, .inline-code {
+				border: 1px solid #CBCBCB;
+			}
+
+			#joplin-container-content {
+				/* The height of the content is set dynamically by JavaScript (in updateBodyHeight) to go
+				   around various issues related to scrolling. However when printing we don't want this
+				   fixed size as that would crop the content. So we set it to auto here. "important" is
+				   needed to override the style set by JavaScript at the element-level. */
+				height: auto !important;
+			}
+		}
+	
+
+				/*
+					FOR THE MARKDOWN EDITOR
+				*/
+
+				/* Remove the indentation from the checkboxes at the root of the document
+				   (otherwise they are too far right), but keep it for their children to allow
+				   nested lists. Make sure this value matches the UL margin. */
+
+				li.md-checkbox {
+					list-style-type: none;
+				}
+
+				li.md-checkbox input[type=checkbox] {
+					margin-left: -1.71em;
+					margin-right: 0.7em;
+					position: relative;
+					top: 1px;
+				}
+				
+				ul.joplin-checklist {
+					list-style:none;
+				}
+
+				/*
+					FOR THE RICH TEXT EDITOR
+				*/
+
+				ul.joplin-checklist li::before {
+					content:"\f14a";
+					font-family:"Font Awesome 5 Free";
+					background-size: 16px 16px;
+					pointer-events: all;
+					cursor: pointer;
+					width: 1em;
+					height: 1em;
+					margin-left: -1.3em;
+					position: absolute;
+					color: #32373F;
+				}
+
+				.joplin-checklist li:not(.checked)::before {
+					content:"\f0c8";
+				}
+.mermaid { width: 640px; }
+pre.mermaid[data-processed=true] { white-space: unset; }
+.mermaid-export-graph {
+					opacity: 0;
+					height: 0;
+					z-index: 1;
+					position: relative;
+				} 
+				.joplin-editable:hover .mermaid-export-graph,
+				.joplin-editable .mermaid-export-graph:has(:focus-visible) {
+					opacity: 1;
+				}
+				.mermaid-export-graph > button:hover {
+					background-color: #CBDAF1 !important;
+				}</style><div id="rendered-md"><p>In this lab, you will install and configure basic email MTA, MDA, and MUA, and email web app functionality with <code class="inline-code">postfix</code>, <code class="inline-code">dovecot</code>, and <code class="inline-code">roundcube</code> software.<br/>
+We will be setting up an Internet site email server for our domain. We are not adding any advanced functions, but simply setting up the basic MTA/MDA and then adding a web application MUA to access the mail on our server.<br/>
+To do this, we will be taking the following actions:</p>
+<ol>
+<li>Add an MX record for our email domain name to our DNS</li>
+<li>Create a custom SSL certificate to use on our MTA</li>
+<li>Allow email service through the firewall</li>
+<li>Install the MTA/MDA/MUA software<br/>
+Please replace <code class="inline-code">lastname45678.mytld</code> with your actual last name and student ID for your domain as per your DNS configuration from Lab 03.</li>
+</ol>
+<h1 id="configure-dns">Configure DNS</h1>
+<ul>
+<li>Add an <code class="inline-code">mx</code> record for your domain, with a target of <code class="inline-code">mail.lastname45678.mytld</code> and a priority of <code class="inline-code">10</code>.
+<ul>
+<li>In your zone file (<code class="inline-code">/etc/bind/db.lastname45678.mytld</code>), the record will look like: <code class="inline-code">@ IN MX 10 mail</code>.</li>
+</ul>
+</li>
+<li>Reload your DNS server and verify that you can <code class="inline-code">ping mail.lastname45678.mytld</code> and that you can retrieve the MX record for your domain and get <code class="inline-code">mail.lastname45678.mytld</code> as the response.</li>
+<li>Verify that you can <code class="inline-code">nslookup mail.lastname45678.mytld</code> and get <code class="inline-code">172.16.5.2</code> as the address.</li>
+<li>Do not proceed until these <code class="inline-code">nslookups</code> work correctly.</li>
+</ul>
+<p>Commands to accomplish these tasks:</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="bash" data-joplin-source-open="```bash
+" data-joplin-source-close="
+```"># Add MX Record (increment Serial)
+nano /etc/bind/db.lastname45678.mytld
+
+# Reload Service
+rndc reload
+
+# Test your DNS modifications
+ping mail
+
+# For MX lookup, should get answers such that: 
+#   lastname45678.mytld	mail exchanger = 10 mail.lastname45678.mytld.
+#   mail.lastname45678.mytld	internet address = 172.16.5.2
+nslookup -querytype=MX lastname45678.mytld
+
+# Should get Address: 172.16.5.2
+nslookup mail.lastname45678.mytld
+</pre><pre class="hljs"><code><span class="hljs-comment"># Add MX Record (increment Serial)</span>
+nano /etc/bind/db.lastname45678.mytld
+
+<span class="hljs-comment"># Reload Service</span>
+rndc reload
+
+<span class="hljs-comment"># Test your DNS modifications</span>
+ping mail
+
+<span class="hljs-comment"># For MX lookup, should get answers such that: </span>
+<span class="hljs-comment">#   lastname45678.mytld	mail exchanger = 10 mail.lastname45678.mytld.</span>
+<span class="hljs-comment">#   mail.lastname45678.mytld	internet address = 172.16.5.2</span>
+nslookup -querytype=MX lastname45678.mytld
+
+<span class="hljs-comment"># Should get Address: 172.16.5.2</span>
+nslookup mail.lastname45678.mytld
+</code></pre></div>
+<p>Example zone file after adding MX record:</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```
+" data-joplin-source-close="
+```">;
+$TTL	86400
+@	IN	SOA	ns1.lastname45678.mytld. hostmaster.lastname45678.mytld. (
+        2025121500		; Serial
+             604800		; Refresh
+              86400		; Retry
+            2419200		; Expire
+              86400 )	; Negative Cache TTL
+;
+@	IN	NS	ns1
+@	IN	MX	10	mail
+ns1	IN	A	172.16.3.2
+www	IN	A	172.16.4.2
+mail	IN	A	172.16.5.2
+router3	IN	A	172.16.3.1
+pop	IN	CNAME	mail
+secure	IN	CNAME	ns1</pre><pre class="hljs"><code><span class="hljs-comment">;</span>
+<span class="hljs-meta">$TTL</span>	<span class="hljs-number">86400</span>
+@	<span class="hljs-keyword">IN</span>	<span class="hljs-keyword">SOA</span>	ns1.lastname45678.mytld. hostmaster.lastname45678.mytld. (
+        <span class="hljs-number">2025121500</span>		<span class="hljs-comment">; Serial</span>
+             <span class="hljs-number">604800</span>		<span class="hljs-comment">; Refresh</span>
+              <span class="hljs-number">86400</span>		<span class="hljs-comment">; Retry</span>
+            <span class="hljs-number">2419200</span>		<span class="hljs-comment">; Expire</span>
+              <span class="hljs-number">86400</span> )	<span class="hljs-comment">; Negative Cache TTL</span>
+<span class="hljs-comment">;</span>
+@	<span class="hljs-keyword">IN</span>	<span class="hljs-keyword">NS</span>	ns1
+@	<span class="hljs-keyword">IN</span>	<span class="hljs-keyword">MX</span>	<span class="hljs-number">10</span>	mail
+ns1	<span class="hljs-keyword">IN</span>	<span class="hljs-keyword">A</span>	<span class="hljs-number">172.16.3.2</span>
+www	<span class="hljs-keyword">IN</span>	<span class="hljs-keyword">A</span>	<span class="hljs-number">172.16.4.2</span>
+mail	<span class="hljs-keyword">IN</span>	<span class="hljs-keyword">A</span>	<span class="hljs-number">172.16.5.2</span>
+router3	<span class="hljs-keyword">IN</span>	<span class="hljs-keyword">A</span>	<span class="hljs-number">172.16.3.1</span>
+pop	<span class="hljs-keyword">IN</span>	<span class="hljs-keyword">CNAME</span>	mail
+secure	<span class="hljs-keyword">IN</span>	<span class="hljs-keyword">CNAME</span>	ns1</code></pre></div>
+<h1 id="generate-key-and-certificate">Generate Key and Certificate</h1>
+<p>Since we are only really concerned with having encryption for mail transport, we don&apos;t usually create real certificates for mail servers. But it is good practice, and this is a course lab. Generate an SSL certificate and key for use with your mail server:</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="bash" data-joplin-source-open="```bash
+" data-joplin-source-close="
+```"># Must be root! 
+cd /etc/openvpn/easy-rsa
+
+# The &quot;nopass&quot; is to skip adding a passphrase to the key
+# Make note of the path to your key
+./easyrsa gen-req mail.lastname45678.mytld nopass
+
+# Sign the request to generate the certificate
+# You will need to know the passphrase for your ca.key!
+./easyrsa sign-req server mail.lastname45678.mytld</pre><pre class="hljs"><code><span class="hljs-comment"># Must be root! </span>
+<span class="hljs-built_in">cd</span> /etc/openvpn/easy-rsa
+
+<span class="hljs-comment"># The &quot;nopass&quot; is to skip adding a passphrase to the key</span>
+<span class="hljs-comment"># Make note of the path to your key</span>
+./easyrsa gen-req mail.lastname45678.mytld nopass
+
+<span class="hljs-comment"># Sign the request to generate the certificate</span>
+<span class="hljs-comment"># You will need to know the passphrase for your ca.key!</span>
+./easyrsa sign-req server mail.lastname45678.mytld</code></pre></div>
+<p>Copy the <code class="inline-code">crt</code> and <code class="inline-code">key</code> files for the mail server to <code class="inline-code">/etc/ssl</code>. Put the certificate file in the <code class="inline-code">certs</code> subdirectory, and the key file in the <code class="inline-code">private</code> subdirectory.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="bash" data-joplin-source-open="```bash
+" data-joplin-source-close="
+```">cp pki/issued/mail.lastname45678.mytld.crt /etc/ssl/certs/
+cp pki/private/mail.lastname45678.mytld.key /etc/ssl/private/</pre><pre class="hljs"><code><span class="hljs-built_in">cp</span> pki/issued/mail.lastname45678.mytld.crt /etc/ssl/certs/
+<span class="hljs-built_in">cp</span> pki/private/mail.lastname45678.mytld.key /etc/ssl/private/</code></pre></div>
+<h1 id="add-firewall-rules-to-allow-email">Add Firewall Rules to Allow Email</h1>
+<p>Even though we have no other machines to really communicate with our mail server, add UFW rules to allow email service through your firewall:</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="bash" data-joplin-source-open="```bash
+" data-joplin-source-close="
+```"># SMTP
+ufw allow 25/tcp
+
+# SMTP with STARTTLS
+ufw allow 587/tcp
+
+# SMTPS (Implicit TLS) 
+ufw allow 465/tcp
+
+# POP3
+ufw allow 110/tcp
+
+# POP3S
+ufw allow 995/tcp
+
+# IMAP
+ufw allow 143/tcp
+
+# IMAPS
+ufw allow 993/tcp</pre><pre class="hljs"><code><span class="hljs-comment"># SMTP</span>
+ufw allow 25/tcp
+
+<span class="hljs-comment"># SMTP with STARTTLS</span>
+ufw allow 587/tcp
+
+<span class="hljs-comment"># SMTPS (Implicit TLS) </span>
+ufw allow 465/tcp
+
+<span class="hljs-comment"># POP3</span>
+ufw allow 110/tcp
+
+<span class="hljs-comment"># POP3S</span>
+ufw allow 995/tcp
+
+<span class="hljs-comment"># IMAP</span>
+ufw allow 143/tcp
+
+<span class="hljs-comment"># IMAPS</span>
+ufw allow 993/tcp</code></pre></div>
+<p><strong>Note:</strong> The above is the list of every default port and supported protocol. If you are configuring a production server, you may want to NOT allow any unencrypted service through the network by configuring your <code class="inline-code">dovecot</code> and <code class="inline-code">postfix</code> servers so the non-encrypted protocols are rejected and not used. The <code class="inline-code">roundcube</code> web mail client will require port <code class="inline-code">143 (IMAP)</code> for communication (does not support <code class="inline-code">IMAPS</code>), but unencrypted traffic can be strictly limited to the <code class="inline-code">localhost</code> when running on the same machine.</p>
+<h1 id="install-the-email-software">Install The Email Software</h1>
+<p>Install the <code class="inline-code">postfix</code>, <code class="inline-code">dovecot</code>, and <code class="inline-code">roundcube</code> software packages:</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="bash" data-joplin-source-open="```bash
+" data-joplin-source-close="
+```">sudo apt update
+sudo apt install postfix dovecot-common dovecot-core dovecot-imapd dovecot-pop3d roundcube</pre><pre class="hljs"><code><span class="hljs-built_in">sudo</span> apt update
+<span class="hljs-built_in">sudo</span> apt install postfix dovecot-common dovecot-core dovecot-imapd dovecot-pop3d roundcube</code></pre></div>
+<p>During the installation of the packages, you may be asked some questions:</p>
+<ul>
+<li>Specify your <code class="inline-code">site type</code> to be <code class="inline-code">Internet Site</code></li>
+<li>Specify <code class="inline-code">lastname45678.mytldname</code> as your <code class="inline-code">mail system name</code></li>
+<li>Specify <strong>Yes</strong> to use <code class="inline-code">dbconfig-common</code> for <code class="inline-code">roundcube</code></li>
+<li>Leave the <code class="inline-code">roundcube</code> database password blank to use a randomly generated password</li>
+</ul>
+<p>You will need to manually edit the <code class="inline-code">dovecot</code> SSL configuration file to specify the correct key and certificate file to use:</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="bash" data-joplin-source-open="```bash
+" data-joplin-source-close="
+```"># Add the path to your key and cert files
+nano /etc/dovecot/conf.d/10-ssl.conf
+
+#### Example: Modify your own file ####
+#
+## SSL settings
+##
+
+# SSL/TLS support: yes, no, required. &lt;doc/wiki/SSL.txt&gt;
+#ssl = yes
+
+# PEM encoded X.509 SSL/TLS certificate and private key. They&apos;re opened before
+# dropping root privileges, so keep the key file unreadable by anyone but
+# root. Included doc/mkcert.sh can be used to easily generate self-signed
+# certificate, just make sure to update the domains in dovecot-openssl.cnf
+#ssl_cert = &lt;/etc/ssl/certs/mail.lastname45678.mytld.crt
+#ssl_key = &lt;/etc/ssl/private/mail.lastname45678.mytld.key
+
+# Restart and check the service:
+service dovecot restart
+service dovecot status
+
+# Verify the current configuration using doveadm utility:
+doveadm config
+doveconf -n</pre><pre class="hljs"><code><span class="hljs-comment"># Add the path to your key and cert files</span>
+nano /etc/dovecot/conf.d/10-ssl.conf
+
+<span class="hljs-comment">#### Example: Modify your own file ####</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment">## SSL settings</span>
+<span class="hljs-comment">##</span>
+
+<span class="hljs-comment"># SSL/TLS support: yes, no, required. &lt;doc/wiki/SSL.txt&gt;</span>
+<span class="hljs-comment">#ssl = yes</span>
+
+<span class="hljs-comment"># PEM encoded X.509 SSL/TLS certificate and private key. They&apos;re opened before</span>
+<span class="hljs-comment"># dropping root privileges, so keep the key file unreadable by anyone but</span>
+<span class="hljs-comment"># root. Included doc/mkcert.sh can be used to easily generate self-signed</span>
+<span class="hljs-comment"># certificate, just make sure to update the domains in dovecot-openssl.cnf</span>
+<span class="hljs-comment">#ssl_cert = &lt;/etc/ssl/certs/mail.lastname45678.mytld.crt</span>
+<span class="hljs-comment">#ssl_key = &lt;/etc/ssl/private/mail.lastname45678.mytld.key</span>
+
+<span class="hljs-comment"># Restart and check the service:</span>
+service dovecot restart
+service dovecot status
+
+<span class="hljs-comment"># Verify the current configuration using doveadm utility:</span>
+doveadm config
+doveconf -n</code></pre></div>
+<h1 id="the-postfix-installation-review-and-modification">The <code class="inline-code">postfix</code> Installation Review and Modification</h1>
+<p>Verify that the email services are running:</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="bash" data-joplin-source-open="```bash
+" data-joplin-source-close="
+```">service postfix status
+service dovecot status</pre><pre class="hljs"><code>service postfix status
+service dovecot status</code></pre></div>
+<p>Verify that the ports are being listened to, and see what the running program names are. Look for the port numbers associated with the email service from the presentation.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="bash" data-joplin-source-open="```bash
+" data-joplin-source-close="
+```">sudo ss -tlpn</pre><pre class="hljs"><code><span class="hljs-built_in">sudo</span> ss -tlpn</code></pre></div>
+<p>Run the <code class="inline-code">postconf</code> command to view all possible settings for your <code class="inline-code">postfix</code> service. Compare that to <code class="inline-code">postconf -n</code> which only shows the settings actually specified in your <code class="inline-code">/etc/postfix/main.cf</code> file.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="bash" data-joplin-source-open="```bash
+" data-joplin-source-close="
+```">postconf
+postconf -n</pre><pre class="hljs"><code>postconf
+postconf -n</code></pre></div>
+<p>Configure your mailbox, hostname, SASL authentication to use <code class="inline-code">dovecot</code>, and TLS/SSL settings using the following <code class="inline-code">postconf</code> commands.<br/>
+The settings that will tell <code class="inline-code">postfix</code> to use <code class="inline-code">dovecot</code> for <code class="inline-code">SASL</code> authentication, and correct the mail server hostname have been provided to you here. Please modify with your own names:</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="bash" data-joplin-source-open="```bash
+" data-joplin-source-close="
+```">postconf -e &quot;home_mailbox =&quot;
+postconf -e &quot;smtpd_sasl_type = dovecot&quot;
+postconf -e &quot;smtpd_sasl_path = private/auth-client&quot;
+postconf -e &quot;smtpd_sasl_local_domain =&quot;
+postconf -e &quot;smtpd_sasl_security_options = noanonymous&quot;
+postconf -e &quot;broken_sasl_auth_clients = yes&quot;
+postconf -e &quot;smtpd_sasl_auth_enable = yes&quot;
+postconf -e &quot;smtp_tls_note_starttls_offer = yes&quot;
+postconf -e &quot;smtpd_tls_loglevel = 1&quot;
+postconf -e &quot;smtpd_tls_received_header = yes&quot;
+postconf -e &quot;myhostname = mail.lastname45678.mytld&quot;
+postconf -e &apos;smtpd_tls_key_file = /etc/ssl/private/mail.lastname45678.mytld.key&apos;
+postconf -e &apos;smtpd_tls_cert_file = /etc/ssl/certs/mail.lastname45678.mytld.crt&apos;</pre><pre class="hljs"><code>postconf -e <span class="hljs-string">&quot;home_mailbox =&quot;</span>
+postconf -e <span class="hljs-string">&quot;smtpd_sasl_type = dovecot&quot;</span>
+postconf -e <span class="hljs-string">&quot;smtpd_sasl_path = private/auth-client&quot;</span>
+postconf -e <span class="hljs-string">&quot;smtpd_sasl_local_domain =&quot;</span>
+postconf -e <span class="hljs-string">&quot;smtpd_sasl_security_options = noanonymous&quot;</span>
+postconf -e <span class="hljs-string">&quot;broken_sasl_auth_clients = yes&quot;</span>
+postconf -e <span class="hljs-string">&quot;smtpd_sasl_auth_enable = yes&quot;</span>
+postconf -e <span class="hljs-string">&quot;smtp_tls_note_starttls_offer = yes&quot;</span>
+postconf -e <span class="hljs-string">&quot;smtpd_tls_loglevel = 1&quot;</span>
+postconf -e <span class="hljs-string">&quot;smtpd_tls_received_header = yes&quot;</span>
+postconf -e <span class="hljs-string">&quot;myhostname = mail.lastname45678.mytld&quot;</span>
+postconf -e <span class="hljs-string">&apos;smtpd_tls_key_file = /etc/ssl/private/mail.lastname45678.mytld.key&apos;</span>
+postconf -e <span class="hljs-string">&apos;smtpd_tls_cert_file = /etc/ssl/certs/mail.lastname45678.mytld.crt&apos;</span></code></pre></div>
+<p>Reload your <code class="inline-code">postfix</code> service and check the config to see that your changes went in as you expected and that the service is still running properly.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="bash" data-joplin-source-open="```bash
+" data-joplin-source-close="
+```">service postfix reload
+postconf -n
+service postfix status</pre><pre class="hljs"><code>service postfix reload
+postconf -n
+service postfix status</code></pre></div>
+<p>Check the log to ensure there were no errors.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="bash" data-joplin-source-open="```bash
+" data-joplin-source-close="
+```">tail /var/log/mail.err</pre><pre class="hljs"><code><span class="hljs-built_in">tail</span> /var/log/mail.err</code></pre></div>
+<h1 id="command-line-email">Command Line Email</h1>
+<p>Send an email to your Linux user email account from root using the mail command to verify you can send and deliver email. Review the mail log to see what gets put there when an email is handled by the service.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="bash" data-joplin-source-open="```bash
+" data-joplin-source-close="
+```"># Run as root:
+apt install mailutils
+mail username
+# Type your email and use Ctrl+D when done typing!
+
+# Check the logs:
+tail /var/log/mail.log</pre><pre class="hljs"><code><span class="hljs-comment"># Run as root:</span>
+apt install mailutils
+mail username
+<span class="hljs-comment"># Type your email and use Ctrl+D when done typing!</span>
+
+<span class="hljs-comment"># Check the logs:</span>
+<span class="hljs-built_in">tail</span> /var/log/mail.log</code></pre></div>
+<h1 id="protocol-testing">Protocol testing</h1>
+<p>These types of protocol-based tests may or may not complete depending on the configuration of your server. The default settings for the service daemons change over time, so from semester to semester, these tests may generate differing results.</p>
+<h2 id="pop3">POP3</h2>
+<ol>
+<li>Use <code class="inline-code">telnet localhost 110</code> to connect to the POP service (<code class="inline-code">port 110</code>), and issue the user (<code class="inline-code">USER yourfirstname</code>) and password (<code class="inline-code">PASS yourpassword</code>) handshake. It will either let you log in or refuse it
+<ul>
+<li>Notice that <code class="inline-code">telnet</code> is a plain-text-only protocol!</li>
+</ul>
+</li>
+<li>If you successfully logged in with <code class="inline-code">POP3</code>, use the list (<code class="inline-code">LIST</code>) protocol commands to see how many email messages you have waiting.</li>
+<li>You can exit your pop connection using <code class="inline-code">QUIT</code>.</li>
+</ol>
+<p>Here is an example output:</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="bash" data-joplin-source-open="```bash
+" data-joplin-source-close="
+```">telnet localhost 110
+Trying 127.0.0.1...
+Connected to localhost.
+Escape character is &apos;^]&apos;.
++OK Dovecot (Ubuntu) ready.
+USER a*****
++OK
+PASS &lt;*oh-no-my-pass-can-leak*&gt;
++OK Logged in.
+LIST
++OK 2 messages:
+1 506
+2 487
+.
+QUIT
++OK Logging out.
+Connection closed by foreign host.</pre><pre class="hljs"><code>telnet localhost 110
+Trying 127.0.0.1...
+Connected to localhost.
+Escape character is <span class="hljs-string">&apos;^]&apos;</span>.
++OK Dovecot (Ubuntu) ready.
+USER a*****
++OK
+PASS &lt;*oh-no-my-pass-can-leak*&gt;
++OK Logged <span class="hljs-keyword">in</span>.
+LIST
++OK 2 messages:
+1 506
+2 487
+.
+QUIT
++OK Logging out.
+Connection closed by foreign host.</code></pre></div>
+<h2 id="imap4">IMAP4</h2>
+<ol>
+<li>Use <code class="inline-code">telnet localhost 143</code> to connect to the IMAP service (<code class="inline-code">port 143</code>).</li>
+<li>Issue the login (<code class="inline-code">a LOGIN yourfirstname yourpassword</code>) protocol command.</li>
+<li>If the login succeeded, try status (<code class="inline-code">a STATUS INBOX (MESSAGES UNSEEN)</code>), and examine (<code class="inline-code">a EXAMINE INBOX</code>) IMAP protocol commands to see how many messages are in your <code class="inline-code">INBOX</code>.</li>
+<li>You can use the logout command to exit your IMAP (<code class="inline-code">a LOGOUT</code>)session.</li>
+</ol>
+<p>Example Output:</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="bash" data-joplin-source-open="```bash
+" data-joplin-source-close="
+```">telnet localhost 143
+Trying 127.0.0.1...
+Connected to localhost.
+Escape character is &apos;^]&apos;.
+* OK [CAPABILITY IMAP4rev1 SASL-IR LOGIN-REFERRALS ID ENABLE IDLE LITERAL+ STARTTLS AUTH=PLAIN] Dovecot (Ubuntu) ready.
+a LOGIN a***** &lt;*oh-no-my-pass-can-leak-again*&gt;
+a OK [CAPABILITY IMAP4rev1 SASL-IR LOGIN-REFERRALS ID ENABLE IDLE SORT SORT=DISPLAY THREAD=REFERENCES THREAD=REFS THREAD=ORDEREDSUBJECT MULTIAPPEND URL-PARTIAL CATENATE UNSELECT CHILDREN NAMESPACE UIDPLUS LIST-EXTENDED I18NLEVEL=1 CONDSTORE QRESYNC ESEARCH ESORT SEARCHRES WITHIN CONTEXT=SEARCH LIST-STATUS BINARY MOVE SNIPPET=FUZZY PREVIEW=FUZZY PREVIEW STATUS=SIZE SAVEDATE LITERAL+ NOTIFY SPECIAL-USE] Logged in
+a STATUS INBOX (MESSAGES UNSEEN)
+* STATUS INBOX (MESSAGES 2 UNSEEN 2)
+a OK Status completed (0.001 + 0.000 secs).
+a EXAMINE INBOX
+* FLAGS (\Answered \Flagged \Deleted \Seen \Draft)
+* OK [PERMANENTFLAGS ()] Read-only mailbox.
+* 2 EXISTS
+* 0 RECENT
+* OK [UNSEEN 1] First unseen.
+* OK [UIDVALIDITY 1765835986] UIDs valid
+* OK [UIDNEXT 3] Predicted next UID
+a OK [READ-ONLY] Examine completed (0.001 + 0.000 secs).
+a LOGOUT
+* BYE Logging out
+a OK Logout completed (0.001 + 0.000 secs).
+Connection closed by foreign host.</pre><pre class="hljs"><code>telnet localhost 143
+Trying 127.0.0.1...
+Connected to localhost.
+Escape character is <span class="hljs-string">&apos;^]&apos;</span>.
+* OK [CAPABILITY IMAP4rev1 SASL-IR LOGIN-REFERRALS ID ENABLE IDLE LITERAL+ STARTTLS AUTH=PLAIN] Dovecot (Ubuntu) ready.
+a LOGIN a***** &lt;*oh-no-my-pass-can-leak-again*&gt;
+a OK [CAPABILITY IMAP4rev1 SASL-IR LOGIN-REFERRALS ID ENABLE IDLE SORT SORT=DISPLAY THREAD=REFERENCES THREAD=REFS THREAD=ORDEREDSUBJECT MULTIAPPEND URL-PARTIAL CATENATE UNSELECT CHILDREN NAMESPACE UIDPLUS LIST-EXTENDED I18NLEVEL=1 CONDSTORE QRESYNC ESEARCH ESORT SEARCHRES WITHIN CONTEXT=SEARCH LIST-STATUS BINARY MOVE SNIPPET=FUZZY PREVIEW=FUZZY PREVIEW STATUS=SIZE SAVEDATE LITERAL+ NOTIFY SPECIAL-USE] Logged <span class="hljs-keyword">in</span>
+a STATUS INBOX (MESSAGES UNSEEN)
+* STATUS INBOX (MESSAGES 2 UNSEEN 2)
+a OK Status completed (0.001 + 0.000 secs).
+a EXAMINE INBOX
+* FLAGS (\Answered \Flagged \Deleted \Seen \Draft)
+* OK [PERMANENTFLAGS ()] Read-only mailbox.
+* 2 EXISTS
+* 0 RECENT
+* OK [UNSEEN 1] First unseen.
+* OK [UIDVALIDITY 1765835986] UIDs valid
+* OK [UIDNEXT 3] Predicted next UID
+a OK [READ-ONLY] Examine completed (0.001 + 0.000 secs).
+a LOGOUT
+* BYE Logging out
+a OK Logout completed (0.001 + 0.000 secs).
+Connection closed by foreign host.</code></pre></div>
+<h1 id="the-roundcube-webmail-application">The <code class="inline-code">roundcube</code> Webmail Application</h1>
+<p>You should have already installed <code class="inline-code">roundcube</code> in the previous step.</p>
+<p>Since we are not concerned about the implications of running <code class="inline-code">roundcube</code> on all of our sites, uncomment the <code class="inline-code">Alias</code> line near the start of the <code class="inline-code">/etc/apache2/conf-available/roundcube.conf</code> file. Reload your <code class="inline-code">apache2</code> service and verify it is still running properly.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="bash" data-joplin-source-open="```bash
+" data-joplin-source-close="
+```">nano /etc/apache2/conf-available/roundcube.conf
+
+apachectl graceful
+service apache2 status</pre><pre class="hljs"><code>nano /etc/apache2/conf-available/roundcube.conf
+
+apachectl graceful
+service apache2 status</code></pre></div>
+<p>Verify you can access the webmail interface with your browser by accessing <code class="inline-code">http://your-ip/roundcube</code> and logging in using your Linux account.</p>
+<h2 id="review-log-files">Review log files</h2>
+<p>Examine the content of <code class="inline-code">mail.log</code> and <code class="inline-code">mail.err</code> in <code class="inline-code">/var/log</code> to see what is being logged for your activity on your mail server. Examine the content of <strong>errors</strong> in <code class="inline-code">/var/log/roundcube/</code> to see if you are having any problems with the <code class="inline-code">roundcube</code> webapp.</p>
+<h1 id="evaluate-your-server">Evaluate your server</h1>
+<ul>
+<li>Run <code class="inline-code">sudo /root/server-check.sh -l 8 firstname lastname studentnumber</code></li>
+<li>Review any problems detected and correct as necessary.</li>
+<li>Do not move on to the next lab until you have this lab at 100%</li>
+<li>If you are having trouble getting Lab 8 to 100%, try running <code class="inline-code">sudo /root/server-check.sh -l 1234567 firstname lastname studentnumber</code> to make sure you haven&apos;t accidentally broken what was completed in previous labs.</li>
+</ul>
+<h1 id="extra-exercise-optional-requires-an-external-server">Extra Exercise (Optional, Requires an External Server)</h1>
+<p>This extra exercise does not count for marks and is not required. But it is a useful practice for setting up email relaying through an ISP which blocks the SMTP port (most modern ISPs block this and force you to send email through their servers). If you have your email server set up like shown in this lab, you can use the following commands to add relaying via an external server. Use the actual name of the mail server you are relaying through instead of <code class="inline-code">yourispmailserverdomainname</code> and your ISP-required email login and password instead of <code class="inline-code">myemailaddress</code> and <code class="inline-code">myemailpassword</code>.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="bash" data-joplin-source-open="```bash
+" data-joplin-source-close="
+```">externalrelayhost=yourispmailserverdomainname
+emailaddr=&apos;myemailaddress&apos;
+emailpass=&apos;myemailpassword&apos;
+sudo postconf -e &quot;smtp_sasl_auth_enable = yes&quot;
+sudo postconf -e &quot;smtp_tls_security_level = encrypt&quot;
+sudo postconf -e &quot;smtp_sasl_tls_security_options = noanonymous&quot;
+sudo postconf -e &quot;relayhost = [$externalrelayhost]:submission&quot;
+sudo postconf -e &quot;smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd&quot;
+echo &quot;[$externalrelayhost]:submission $emailaddr:$emailpass&quot; | sudo tee /etc/postfix/sasl_passwd &gt;/dev/null
+sudo postmap hash:sasl_passwd
+sudo systemctl restart postfix</pre><pre class="hljs"><code>externalrelayhost=yourispmailserverdomainname
+emailaddr=<span class="hljs-string">&apos;myemailaddress&apos;</span>
+emailpass=<span class="hljs-string">&apos;myemailpassword&apos;</span>
+<span class="hljs-built_in">sudo</span> postconf -e <span class="hljs-string">&quot;smtp_sasl_auth_enable = yes&quot;</span>
+<span class="hljs-built_in">sudo</span> postconf -e <span class="hljs-string">&quot;smtp_tls_security_level = encrypt&quot;</span>
+<span class="hljs-built_in">sudo</span> postconf -e <span class="hljs-string">&quot;smtp_sasl_tls_security_options = noanonymous&quot;</span>
+<span class="hljs-built_in">sudo</span> postconf -e <span class="hljs-string">&quot;relayhost = [<span class="hljs-variable">$externalrelayhost</span>]:submission&quot;</span>
+<span class="hljs-built_in">sudo</span> postconf -e <span class="hljs-string">&quot;smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;[<span class="hljs-variable">$externalrelayhost</span>]:submission <span class="hljs-variable">$emailaddr</span>:<span class="hljs-variable">$emailpass</span>&quot;</span> | <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">tee</span> /etc/postfix/sasl_passwd &gt;/dev/null
+<span class="hljs-built_in">sudo</span> postmap <span class="hljs-built_in">hash</span>:sasl_passwd
+<span class="hljs-built_in">sudo</span> systemctl restart postfix</code></pre></div>
+<p>Your Linux mail server should now be able to send email to any legitimate Internet email address, although it cannot send email to your email server without further work on your part. It is still useful for sending yourself an email from your Linux system instead of having to log onto the Linux system to read mail sent to root or other users. You can even create an alias for root to forward root mail to your normal email account. You can test this using a command like:</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="bash" data-joplin-source-open="```bash
+" data-joplin-source-close="
+```">sudo nano /etc/aliases
+sudo newaliases
+mail -s &quot;Test message from COMP1071 server&quot; root &lt;&lt;&lt; &quot;testing...testing&quot;</pre><pre class="hljs"><code><span class="hljs-built_in">sudo</span> nano /etc/aliases
+<span class="hljs-built_in">sudo</span> newaliases
+mail -s <span class="hljs-string">&quot;Test message from COMP1071 server&quot;</span> root &lt;&lt;&lt; <span class="hljs-string">&quot;testing...testing&quot;</span></code></pre></div>
+<h2 id="further-resources-and-reading">Further Resources and Reading</h2>
+<ul>
+<li>Review [<a data-from-md="" title="http://www.postfix.org/SASL_README.html" href="http://www.postfix.org/SASL_README.html">http://www.postfix.org/SASL_README.html</a>] for a detailed how-to on setting up other scenarios for <code class="inline-code">postfix</code> using either <code class="inline-code">dovecot</code> or <code class="inline-code">cyrus</code> for Simple Authentication and Security Layer.</li>
+<li>Review [<a data-from-md="" title="https://help.ubuntu.com/community/PostfixVirtualMailBoxClamSmtpHowto" href="https://help.ubuntu.com/community/PostfixVirtualMailBoxClamSmtpHowto">https://help.ubuntu.com/community/PostfixVirtualMailBoxClamSmtpHowto</a>] for an overview of how to configure multiple email domains on a single <code class="inline-code">postfix</code>/<code class="inline-code">dovecot</code> server.</li>
+<li>Review <a data-from-md="" title="http://www.postfix.org/SOHO_README.html" href="http://www.postfix.org/SOHO_README.html">Postfix SOHO Hints and Tips</a> for settings and commands for configuring email servers connected to ISPs that require you to relay mail through servers.</li>
+</ul>
+</div></div>
+					</body>
+				</html>
+			
