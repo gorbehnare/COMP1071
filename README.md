@@ -24,4 +24,4 @@ Site to host HTML version of updated labs and other course material.
 - [Lab 06 - MySQL Server](./Assignments/Lab%2006%20-%20MySQL%20Server.html)
 - [Lab 07 - CUPS](./Assignments/Lab%2007%20-%20CUPS.html)
 - [Lab 08 - Email Services](./Assignments/Lab%2008%20-%20Email%20Services.html)
-- Lab 09 - FTP and SAMBA
+- [Lab 09 - SAMBA and FTP](./Assignments/Lab%2009%20-%20SAMBA%20and%20FTP.html)
