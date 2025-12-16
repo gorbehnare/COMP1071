@@ -1198,7 +1198,9 @@ dpkg -L vsftpd>&/dev/null
 if [ "$?" = "0" ]; then
 	lab_header "09"
 	package_checks "samba vsftpd"
-	smbclient -U student //localhost/student Password01 <<< "ls" >/dev/null
+	### A.E. ### 2025-12-16
+	# smbclient -U student //localhost/student Password01 <<< "ls" >/dev/null
+	smbclient -U student //localhost/student Password01 --command "ls;" >/dev/null
 	if [ $? != "0" ]; then
 		problem-report "unable to access student share using smbclient"
 	else
