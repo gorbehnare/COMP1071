@@ -8,7 +8,7 @@ Site to host HTML version of updated labs and other course material.
 - [03 - Networking and Tools](./03%20-%20Networking%20and%20Tools.html)
 - [04 - DNS Service](./04%20-%20DNS%20Service.html)
 - [05 - Apache Web Server](./05%20-%20Apache%20Web%20Server.html)
-- 06 - Apache with TLS
+- [06 - Apache with TLS](./06%20-%20Apache%20with%20TLS.html)
 - 07 - MySQL Server
 - 08 - CUPS
 - 09 - Email
