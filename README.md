@@ -12,7 +12,7 @@ Site to host HTML version of updated labs and other course material.
 - [07 - MySQL Server](./07%20-%20MySQL%20Server.html)
 - [08 - CUPS](./08%20-%20CUPS.html)
 - [09 - Email](./09%20-%20Email.html)
-- 10 - File Sharing
+- [10 - File Sharing](./10%20-%20File%20Sharing.html)
 
 ## Assignments:
 - [Lab 00 - VM Creation For the Course](./Assignments/Lab%2000%20-%20VM%20Creation%20For%20the%20Course.html)
