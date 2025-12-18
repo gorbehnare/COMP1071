@@ -11,7 +11,7 @@ Site to host HTML version of updated labs and other course material.
 - [06 - Apache with TLS](./06%20-%20Apache%20with%20TLS.html)
 - [07 - MySQL Server](./07%20-%20MySQL%20Server.html)
 - [08 - CUPS](./08%20-%20CUPS.html)
-- 09 - Email
+- [09 - Email](./09%20-%20Email.html)
 - 10 - File Sharing
 
 ## Assignments:
