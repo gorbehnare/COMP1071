@@ -765,7 +765,7 @@ hue-6-2: #c18401
 		}
 
 		.jop-tinymce table tr:nth-child(even),
-		table tr:nth-child(even) {
+		table:has(thead) tr:nth-child(even) {
 			background-color: rgb(247, 247, 247);
 		}
 
@@ -978,6 +978,11 @@ hue-6-2: #c18401
 				.joplin-checklist li:not(.checked)::before {
 					content:"\f0c8";
 				}
+
+				.abc-notation-block svg {
+					background-color: white;
+				}
+			
 .mermaid { width: 640px; }
 pre.mermaid[data-processed=true] { white-space: unset; }
 .mermaid-export-graph {
@@ -1136,7 +1141,7 @@ sl
 fortune
 iostat
 <span class="hljs-built_in">sudo</span> ss -tlpn</code></pre></div>
-<p>Use the <code class="inline-code">df -h</code> command to see how much free space you have on your server. Review the descriptive first paragraph of the man page for each of the commands on the slides from the presentation. Try each of the <code class="inline-code">id</code>, <code class="inline-code">who</code>, <code class="inline-code">w</code>, <code class="inline-code">last</code>, <code class="inline-code">du</code>, <code class="inline-code">mount</code>, <code class="inline-code">lshw</code>, <code class="inline-code">lspci</code>, <code class="inline-code">lsusb</code>, <code class="inline-code">lscpu</code>, <code class="inline-code">ps</code>, <code class="inline-code">vmstat</code>, <code class="inline-code">prtstat</code>, <code class="inline-code">netstat</code>, <code class="inline-code">top</code>, <code class="inline-code">dpkg</code> commands on your VM.</p>
+<p>Use the <code class="inline-code">df -h</code> command to see how much free space you have on your server. Review the descriptive first paragraph of the man page for each of the commands on the slides from the presentation. Try each of the <code class="inline-code">id</code>, <code class="inline-code">who</code>, <code class="inline-code">w</code>, <code class="inline-code">last</code>, <code class="inline-code">du</code>, <code class="inline-code">mount</code>, <code class="inline-code">lshw</code>, <code class="inline-code">lspci</code>, <code class="inline-code">lsusb</code>, <code class="inline-code">lscpu</code>, <code class="inline-code">ps</code>, <code class="inline-code">vmstat</code>, <code class="inline-code">prtstat</code>, <code class="inline-code">ss</code>, <code class="inline-code">top</code>, <code class="inline-code">dpkg</code> commands on your VM.</p>
 <h1 id="evaluate-your-server">Evaluate Your Server</h1>
 <p>Download the <code class="inline-code">server-check.sh</code> script from <strong>github</strong> as directed in Lab 00 and run it for the first lab:</p>
 <div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```
