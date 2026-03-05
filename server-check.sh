@@ -958,7 +958,7 @@ if [ "$dbinstalled" = 1 ]; then
 #	package_checks "phpmyadmin webmin"
 	package_checks "phpmyadmin"
 # check for mysqldump output file
-	if [ -s /root/mysql-backup.sql ]; then
+	if [ ! -s /root/mysql-backup.sql ]; then
 		problem-report "mysql-backup.sql not found under /root"
 		problem-report "Review the instructions for using mysqldump to create the mysql-backup.sql file"
 	else
