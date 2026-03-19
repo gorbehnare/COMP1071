@@ -1142,7 +1142,9 @@ chmod +r ~/public_html/*.pdf</pre><pre class="hljs"><code><span class="hljs-buil
 <li>Visit your website to download or view your PDF files: <code class="inline-code">http://&lt;IP_Address&gt;/~&lt;username&gt;/&lt;filename&gt;</code></li>
 <li>You could even add a hyperlink to your files inside your <code class="inline-code">index.html</code> document to save typing out the filename in the URL. The following is just an example. Replace the file names with your filenames:<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="bash" data-joplin-source-open="```bash
 " data-joplin-source-close="
-```">echo &quot;&lt;p&gt;My &lt;a href=cupsd.conf__PDF-job_1.pdf&gt;PDF file of the cupsd.conf file&lt;/a&gt; can be viewed by clicking on the link.&lt;/p&gt;&quot; &gt;&gt; public_html/index.html</pre><pre class="hljs"><code><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;&lt;p&gt;My &lt;a href=cupsd.conf__PDF-job_1.pdf&gt;PDF file of the cupsd.conf file&lt;/a&gt; can be viewed by clicking on the link.&lt;/p&gt;&quot;</span> &gt;&gt; public_html/index.html</code></pre></div>
+```"># make sure to modify the filename in href=&lt;pdf_filename&gt;. This is just an example:
+echo &quot;&lt;p&gt;My &lt;a href=cupsd.conf__PDF-job_1.pdf&gt;PDF file of the cupsd.conf file&lt;/a&gt; can be viewed by clicking on the link.&lt;/p&gt;&quot; &gt;&gt; public_html/index.html</pre><pre class="hljs"><code><span class="hljs-comment"># make sure to modify the filename in href=&lt;pdf_filename&gt;. This is just an example:</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;&lt;p&gt;My &lt;a href=cupsd.conf__PDF-job_1.pdf&gt;PDF file of the cupsd.conf file&lt;/a&gt; can be viewed by clicking on the link.&lt;/p&gt;&quot;</span> &gt;&gt; public_html/index.html</code></pre></div>
 </li>
 </ul>
 <h2 id="modify-cups-pdf-printer-configuration">Modify <code class="inline-code">cups-pdf</code> Printer Configuration</h2>
